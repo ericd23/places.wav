@@ -42,119 +42,33 @@ const archives = [
 ---
 
 <Layout title="Archive - Places" description="Photography, workshops, events, and historical documentation">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-    <!-- Header -->
-    <div class="text-center mb-12">
-      <h1 class="text-4xl md:text-5xl font-bold text-blue-900 mb-4">Archive</h1>
-      <p class="text-xl text-blue-700 max-w-3xl mx-auto">
-        Documentation of workshops, events, photography, and community activities 
-        that capture the spirit and growth of our collective
-      </p>
-    </div>
-
-    <!-- Filter Tabs -->
-    <div class="flex flex-wrap justify-center gap-4 mb-12">
-      <button class="px-6 py-2 rounded-full bg-blue-100 text-blue-900 font-medium hover:bg-blue-200 transition-colors">
-        All
-      </button>
-      <button class="px-6 py-2 rounded-full text-blue-700 hover:bg-blue-100 transition-colors">
-        Photography
-      </button>
-      <button class="px-6 py-2 rounded-full text-blue-700 hover:bg-blue-100 transition-colors">
-        Workshops
-      </button>
-      <button class="px-6 py-2 rounded-full text-blue-700 hover:bg-blue-100 transition-colors">
-        Events
-      </button>
-    </div>
-
-    <!-- Archive Grid -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+  <div class="p-4 max-w-2xl">
+    <h1 class="text-2xl mb-8">Archive</h1>
+    
+    <div class="space-y-4">
       {archives.map((item) => (
-        <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow group">
-          <!-- Archive Image -->
-          <div class="h-64 relative overflow-hidden">
-            {item.data.type === 'photography' && (
-              <div class="h-full bg-gradient-to-br from-pink-400 via-purple-500 to-indigo-600"></div>
-            )}
-            {item.data.type === 'workshop' && (
-              <div class="h-full bg-gradient-to-br from-green-400 via-blue-500 to-teal-600"></div>
-            )}
-            {item.data.type === 'event' && (
-              <div class="h-full bg-gradient-to-br from-orange-400 via-red-500 to-pink-600"></div>
-            )}
-            
-            <div class="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors"></div>
-            
-            <!-- Type Badge -->
-            <div class="absolute top-4 left-4">
-              <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-white/90 backdrop-blur-sm">
-                {item.data.type === 'photography' && '📸 Photography'}
-                {item.data.type === 'workshop' && '🎓 Workshop'}
-                {item.data.type === 'event' && '🎵 Event'}
-              </span>
+        <div class="border-b border-gray-800 pb-4">
+          <div class="flex justify-between items-start mb-2">
+            <div>
+              <h2 class="text-lg mb-1">
+                <a href={`/archive/${item.slug}`} class="hover:text-gray-300">
+                  {item.data.title}
+                </a>
+              </h2>
+              <p class="text-sm text-gray-400">{item.data.type}</p>
             </div>
-            
-            <!-- Date -->
-            <div class="absolute bottom-4 right-4">
-              <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-white/90 backdrop-blur-sm text-gray-800">
-                {item.data.date.toLocaleDateString('en-US', { 
-                  year: 'numeric', 
-                  month: 'short'
-                })}
-              </span>
-            </div>
+            <span class="text-xs text-gray-500">
+              {item.data.date.toLocaleDateString('en-US', { 
+                year: 'numeric', 
+                month: 'short'
+              })}
+            </span>
           </div>
-          
-          <!-- Archive Details -->
-          <div class="p-6">
-            <h3 class="text-xl font-bold text-blue-900 mb-3 leading-tight">
-              {item.data.title}
-            </h3>
-            
-            <p class="text-blue-700 text-sm mb-4 line-clamp-3">
-              {item.data.description}
-            </p>
-            
-            <div class="flex items-center justify-between">
-              <a 
-                href={`/archive/${item.slug}`}
-                class="inline-flex items-center text-green-600 hover:text-green-700 font-medium text-sm transition-colors"
-              >
-                View Details →
-              </a>
-              <time class="text-xs text-blue-600" datetime={item.data.date.toISOString()}>
-                {item.data.date.toLocaleDateString('en-US', { 
-                  month: 'long',
-                  day: 'numeric',
-                  year: 'numeric'
-                })}
-              </time>
-            </div>
-          </div>
+          <p class="text-xs text-gray-500 mt-2">
+            {item.data.description}
+          </p>
         </div>
       ))}
     </div>
-    
-    <!-- Archive Mission -->
-    <div class="mt-16 bg-gradient-to-r from-blue-900 to-indigo-900 text-white rounded-lg p-8 md:p-12">
-      <div class="max-w-3xl mx-auto text-center">
-        <h3 class="text-2xl md:text-3xl font-bold mb-6">Documenting Our Journey</h3>
-        <p class="text-blue-100 text-lg leading-relaxed">
-          Our archive preserves the moments, workshops, and collaborations that define Places. 
-          From educational workshops to photography projects, these entries capture our 
-          community's growth and creative evolution.
-        </p>
-      </div>
-    </div>
   </div>
 </Layout>
-
-<style>
-  .line-clamp-3 {
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-</style>

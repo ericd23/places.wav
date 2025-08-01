@@ -75,72 +75,30 @@ const conversations = [
 ---
 
 <Layout title="Conversations - Places" description="Interviews and conversations with DJs, artists, and community members">
-  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-    <!-- Header -->
-    <div class="text-center mb-12">
-      <h1 class="text-4xl md:text-5xl font-bold text-blue-900 mb-4">Conversations</h1>
-      <p class="text-xl text-blue-700">
-        In-depth interviews and discussions with DJs, artists, and community members 
-        exploring music culture, creativity, and community building
-      </p>
-    </div>
-
-    <!-- Conversations List -->
-    <div class="space-y-6">
-      {conversations.map((convo) => (
-        <article class="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow overflow-hidden">
-          <div class="p-6 md:p-8">
-            <div class="flex items-start justify-between mb-4">
-              <div class="flex-1">
-                <div class="flex items-center gap-3 mb-2">
-                  <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800">
-                    Convo {convo.data.number.toString().padStart(3, '0')}
-                  </span>
-                  <time class="text-sm text-blue-600" datetime={convo.data.date.toISOString()}>
-                    {convo.data.date.toLocaleDateString('en-US', { 
-                      year: 'numeric', 
-                      month: 'long',
-                      day: 'numeric'
-                    })}
-                  </time>
-                </div>
-                <h2 class="text-xl md:text-2xl font-bold text-blue-900 mb-3">
-                  {convo.data.title}
-                </h2>
-                <div class="text-blue-700 mb-4">
-                  <span class="font-medium">Participants: </span>
-                  {convo.data.participants.join(', ')}
-                </div>
-              </div>
-              <div class="ml-4 flex-shrink-0">
-                <div class="w-16 h-16 bg-gradient-to-br from-blue-400 to-purple-500 rounded-lg"></div>
-              </div>
-            </div>
-            
-            <div class="flex items-center justify-between pt-4 border-t border-blue-100">
-              <a 
-                href={`/convo/${convo.slug}`}
-                class="inline-flex items-center text-green-600 hover:text-green-700 font-medium transition-colors"
-              >
-                Read Conversation →
-              </a>
-              <div class="text-sm text-blue-600">
-                Interview
-              </div>
-            </div>
-          </div>
-        </article>
-      ))}
-    </div>
+  <div class="p-4 max-w-2xl">
+    <h1 class="text-2xl mb-8">Convo</h1>
     
-    <!-- Series Info -->
-    <div class="mt-12 bg-blue-900 text-white rounded-lg p-8 text-center">
-      <h3 class="text-2xl font-bold mb-4">About the Series</h3>
-      <p class="text-blue-100 max-w-2xl mx-auto">
-        Our conversation series features in-depth discussions with DJs, producers, 
-        and community members about music culture, creative processes, and the role 
-        of music in building communities.
-      </p>
+    <div class="space-y-4">
+      {conversations.map((convo) => (
+        <div class="border-b border-gray-800 pb-4">
+          <div class="flex justify-between items-start mb-2">
+            <div>
+              <h2 class="text-lg mb-1">
+                <a href={`/convo/${convo.slug}`} class="hover:text-gray-300">
+                  {convo.data.number.toString().padStart(3, '0')}: {convo.data.title}
+                </a>
+              </h2>
+              <p class="text-sm text-gray-400">{convo.data.participants.join(', ')}</p>
+            </div>
+            <span class="text-xs text-gray-500">
+              {convo.data.date.toLocaleDateString('en-US', { 
+                year: 'numeric', 
+                month: 'short'
+              })}
+            </span>
+          </div>
+        </div>
+      ))}
     </div>
   </div>
 </Layout>

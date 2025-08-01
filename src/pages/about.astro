@@ -3,160 +3,47 @@ import Layout from '../layouts/Layout.astro';
 ---
 
 <Layout title="About - Places" description="Learn about Places, a Hamilton-based DJ collective focused on democratizing DJ practices and music education">
-  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-    <!-- Hero Section -->
-    <div class="text-center mb-16">
-      <h1 class="text-4xl md:text-5xl font-bold text-blue-900 mb-6">About Places</h1>
-      <p class="text-xl md:text-2xl text-blue-700 leading-relaxed">
-        A Hamilton-based DJ collective focused on democratizing DJ practices 
-        and providing alternative music education
+  <div class="p-4 max-w-2xl">
+    <h1 class="text-2xl mb-8">About</h1>
+    
+    <div class="text-sm leading-relaxed text-gray-300 space-y-6">
+      <p>
+        Places is a Hamilton-based DJ collective focused on democratizing DJ practices 
+        and providing alternative music education.
       </p>
+      
+      <p>
+        We prioritize emerging DJs and music creators, working through workshops, 
+        skill development, and community building to create opportunities for 
+        artists to grow and connect.
+      </p>
+      
+      <div class="border-t border-gray-800 pt-6 mt-8">
+        <h2 class="text-lg mb-4">What we do</h2>
+        <ul class="space-y-2 text-gray-400">
+          <li>DJ education and workshops</li>
+          <li>Community building</li>
+          <li>Music curation and showcasing</li>
+          <li>Conversation series with artists</li>
+        </ul>
+      </div>
+      
+      <div class="border-t border-gray-800 pt-6 mt-8">
+        <h2 class="text-lg mb-4">Contact</h2>
+        <div class="space-y-2 text-gray-400">
+          <div>
+            <a href="https://instagram.com/places.wav" target="_blank" rel="noopener noreferrer" class="hover:text-white">
+              Instagram
+            </a>
+          </div>
+          <div>
+            <a href="https://discord.gg/Z3FX6376pS" target="_blank" rel="noopener noreferrer" class="hover:text-white">
+              Discord
+            </a>
+          </div>
+          <div>placeswav@gmail.com</div>
+        </div>
+      </div>
     </div>
-
-    <!-- Mission Section -->
-    <section class="mb-16">
-      <div class="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg p-8 md:p-12">
-        <h2 class="text-3xl font-bold text-blue-900 mb-6 text-center">Our Mission</h2>
-        <div class="prose prose-lg prose-blue mx-auto text-center">
-          <p class="text-blue-800 leading-relaxed">
-            Places prioritizes emerging DJs and music creators, working to democratize DJ practices 
-            and provide alternative music education. Through workshops, skill development, and 
-            community building, we create opportunities for artists to grow and connect.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- What We Do -->
-    <section class="mb-16">
-      <h2 class="text-3xl font-bold text-blue-900 mb-8 text-center">What We Do</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <div class="text-center">
-          <div class="w-16 h-16 bg-green-500 rounded-lg mx-auto mb-4 flex items-center justify-center">
-            <span class="text-white text-2xl">🎧</span>
-          </div>
-          <h3 class="text-xl font-semibold text-blue-900 mb-3">DJ Education</h3>
-          <p class="text-blue-700">
-            Workshops and skill development sessions that teach both technical skills 
-            and cultural understanding of DJ practices.
-          </p>
-        </div>
-        
-        <div class="text-center">
-          <div class="w-16 h-16 bg-blue-500 rounded-lg mx-auto mb-4 flex items-center justify-center">
-            <span class="text-white text-2xl">🤝</span>
-          </div>
-          <h3 class="text-xl font-semibold text-blue-900 mb-3">Community Building</h3>
-          <p class="text-blue-700">
-            Creating connections between emerging and established artists, 
-            fostering a supportive creative community.
-          </p>
-        </div>
-        
-        <div class="text-center md:col-span-2 lg:col-span-1">
-          <div class="w-16 h-16 bg-purple-500 rounded-lg mx-auto mb-4 flex items-center justify-center">
-            <span class="text-white text-2xl">🎵</span>
-          </div>
-          <h3 class="text-xl font-semibold text-blue-900 mb-3">Music Curation</h3>
-          <p class="text-blue-700">
-            Showcasing diverse electronic music genres and providing platforms 
-            for artists to share their work with wider audiences.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Team Section -->
-    <section class="mb-16">
-      <h2 class="text-3xl font-bold text-blue-900 mb-8 text-center">The Collective</h2>
-      <div class="bg-white rounded-lg shadow-md p-8 md:p-12">
-        <div class="text-center mb-8">
-          <p class="text-lg text-blue-700 leading-relaxed">
-            Places is powered by a diverse group of DJs, educators, and music enthusiasts 
-            who share a passion for democratizing music education and building inclusive 
-            creative communities in Hamilton and beyond.
-          </p>
-        </div>
-        
-        <!-- Team Grid Placeholder -->
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-          {[1, 2, 3, 4].map((i) => (
-            <div class="text-center">
-              <div class="w-20 h-20 bg-gradient-to-br from-green-400 to-blue-500 rounded-full mx-auto mb-3"></div>
-              <div class="text-sm text-blue-600">Collective Member</div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-
-    <!-- Programs Section -->
-    <section class="mb-16">
-      <h2 class="text-3xl font-bold text-blue-900 mb-8 text-center">Our Programs</h2>
-      <div class="space-y-8">
-        <div class="bg-white rounded-lg shadow-md p-6 md:p-8">
-          <h3 class="text-xl font-semibold text-blue-900 mb-4">Workshop Series</h3>
-          <p class="text-blue-700 mb-4">
-            Regular hands-on workshops covering DJ techniques, music theory, and cultural context. 
-            Our three-month cohort programs include guided discussions, technical training, and Q&A sessions.
-          </p>
-          <div class="text-sm text-green-600 font-medium">
-            Partnership with Hamilton Artists Inc.
-          </div>
-        </div>
-        
-        <div class="bg-white rounded-lg shadow-md p-6 md:p-8">
-          <h3 class="text-xl font-semibold text-blue-900 mb-4">Conversation Series</h3>
-          <p class="text-blue-700 mb-4">
-            In-depth interviews with DJs, producers, and community members exploring 
-            music culture, creative processes, and community building.
-          </p>
-          <div class="text-sm text-green-600 font-medium">
-            7 conversations and counting
-          </div>
-        </div>
-        
-        <div class="bg-white rounded-lg shadow-md p-6 md:p-8">
-          <h3 class="text-xl font-semibold text-blue-900 mb-4">Mix Curation</h3>
-          <p class="text-blue-700 mb-4">
-            Featuring diverse electronic music from collective members and guest artists, 
-            providing a platform for emerging talent to reach wider audiences.
-          </p>
-          <div class="text-sm text-green-600 font-medium">
-            Regular releases and features
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Contact Info -->
-    <section class="bg-blue-900 text-white rounded-lg p-8 md:p-12 text-center">
-      <h2 class="text-2xl md:text-3xl font-bold mb-6">Get Involved</h2>
-      <p class="text-blue-100 text-lg mb-8 leading-relaxed">
-        Interested in joining our workshops, contributing to our conversation series, 
-        or collaborating with our collective? We'd love to hear from you.
-      </p>
-      <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <a 
-          href="https://instagram.com/places.wav" 
-          target="_blank" 
-          rel="noopener noreferrer"
-          class="inline-flex items-center px-6 py-3 border border-green-400 text-base font-medium rounded-md text-green-400 hover:bg-green-400 hover:text-blue-900 transition-colors"
-        >
-          Follow on Instagram
-        </a>
-        <a 
-          href="https://discord.gg/Z3FX6376pS" 
-          target="_blank" 
-          rel="noopener noreferrer"
-          class="inline-flex items-center px-6 py-3 border border-blue-300 text-base font-medium rounded-md text-blue-300 hover:bg-blue-300 hover:text-blue-900 transition-colors"
-        >
-          Join Discord
-        </a>
-      </div>
-      <div class="mt-6 text-blue-300 text-sm">
-        Email: placeswav@gmail.com
-      </div>
-    </section>
   </div>
 </Layout>

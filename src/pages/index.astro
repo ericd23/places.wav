@@ -8,87 +8,74 @@ import { getCollection } from 'astro:content';
 // const featuredArchive = await getCollection('archive', ({ data }) => data.featured);
 ---
 
-<Layout title="Places - Hamilton DJ Collective">
-  <!-- Hero Section -->
-  <section class="bg-gradient-to-b from-gray-800 to-gray-900 py-12 md:py-20">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <h1 class="text-4xl md:text-6xl font-bold text-white mb-6">
-        Places
-      </h1>
-      <p class="text-xl md:text-2xl text-gray-300 mb-8 leading-relaxed">
-        A Hamilton-based DJ collective focused on democratizing DJ practices and music education
+<Layout title="Places">
+  <div class="p-4 max-w-2xl">
+    <div class="mb-8">
+      <h1 class="text-2xl mb-4">Places</h1>
+      <p class="text-gray-400 mb-8">
+        Hamilton DJ collective. Democratizing DJ practices and music education.
       </p>
-      <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <a href="/mixes" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-black bg-green-400 hover:bg-green-500 transition-colors">
-          Latest Mixes
-        </a>
-        <a href="/convo" class="inline-flex items-center px-6 py-3 border border-gray-600 text-base font-medium rounded-md text-gray-300 bg-gray-800 hover:bg-gray-700 transition-colors">
-          Conversations
-        </a>
-      </div>
     </div>
-  </section>
 
-  <!-- Featured Content -->
-  <section class="py-12 md:py-16">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-bold text-white mb-8 text-center">Latest</h2>
-      
-      <!-- Content Grid -->
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <!-- Sample Mix Card -->
-        <div class="bg-gray-800 rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow border border-gray-700">
-          <div class="h-48 bg-gradient-to-br from-green-400 to-blue-500"></div>
-          <div class="p-6">
-            <div class="text-sm text-green-400 font-medium mb-2">Mix</div>
-            <h3 class="text-lg font-semibold text-white mb-2">Sample Mix Title</h3>
-            <p class="text-gray-400 text-sm mb-4">Artist Name</p>
-            <a href="#" class="text-green-400 hover:text-green-300 font-medium text-sm">
-              Listen →
-            </a>
+    <div class="space-y-12">
+      <section>
+        <h2 class="text-lg mb-4">Latest Mixes</h2>
+        <div class="space-y-2 text-sm">
+          <div class="flex justify-between py-1 border-b border-gray-800">
+            <a href="/mixes/echomosa-june" class="hover:text-white">EchöMosa x Places - June</a>
+            <span class="text-gray-500">June 2024</span>
+          </div>
+          <div class="flex justify-between py-1 border-b border-gray-800">
+            <a href="/mixes/blockletter-july" class="hover:text-white">Blockletter x Places - July</a>
+            <span class="text-gray-500">July 2024</span>
+          </div>
+          <div class="flex justify-between py-1 border-b border-gray-800">
+            <a href="/mixes/aziza-places" class="hover:text-white">azizA x Places</a>
+            <span class="text-gray-500">May 2024</span>
           </div>
         </div>
+        <p class="text-xs text-gray-500 mt-4">
+          <a href="/mixes" class="hover:text-white">All mixes →</a>
+        </p>
+      </section>
 
-        <!-- Sample Conversation Card -->
-        <div class="bg-gray-800 rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow border border-gray-700">
-          <div class="h-48 bg-gradient-to-br from-blue-400 to-purple-500"></div>
-          <div class="p-6">
-            <div class="text-sm text-blue-400 font-medium mb-2">Conversation</div>
-            <h3 class="text-lg font-semibold text-white mb-2">Convo 007: Sample</h3>
-            <p class="text-gray-400 text-sm mb-4">Participants</p>
-            <a href="#" class="text-green-400 hover:text-green-300 font-medium text-sm">
-              Read →
-            </a>
+      <section>
+        <h2 class="text-lg mb-4">Latest Conversations</h2>
+        <div class="space-y-2 text-sm">
+          <div class="flex justify-between py-1 border-b border-gray-800">
+            <a href="/convo/safetypanel" class="hover:text-white">Convo 007: Safety in Dance Culture</a>
+            <span class="text-gray-500">May 2024</span>
+          </div>
+          <div class="flex justify-between py-1 border-b border-gray-800">
+            <a href="/convo/convo-006-hamiltonaire" class="hover:text-white">Convo 006: Hamiltonaire</a>
+            <span class="text-gray-500">Apr 2024</span>
+          </div>
+          <div class="flex justify-between py-1 border-b border-gray-800">
+            <a href="/convo/convo-001-dj-abdi" class="hover:text-white">Convo 001: DJ Abdi</a>
+            <span class="text-gray-500">Apr 2024</span>
           </div>
         </div>
+        <p class="text-xs text-gray-500 mt-4">
+          <a href="/convo" class="hover:text-white">All conversations →</a>
+        </p>
+      </section>
 
-        <!-- Sample Archive Card -->
-        <div class="bg-gray-800 rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow border border-gray-700 md:col-span-2 lg:col-span-1">
-          <div class="h-48 bg-gradient-to-br from-purple-400 to-pink-500"></div>
-          <div class="p-6">
-            <div class="text-sm text-purple-400 font-medium mb-2">Archive</div>
-            <h3 class="text-lg font-semibold text-white mb-2">Workshop Series</h3>
-            <p class="text-gray-400 text-sm mb-4">DJ Education</p>
-            <a href="#" class="text-green-400 hover:text-green-300 font-medium text-sm">
-              View →
-            </a>
+      <section>
+        <h2 class="text-lg mb-4">Recent Archive</h2>
+        <div class="space-y-2 text-sm">
+          <div class="flex justify-between py-1 border-b border-gray-800">
+            <a href="/archive/triumvirate-photo" class="hover:text-white">Triumvirate Photo Series</a>
+            <span class="text-gray-500">Photography</span>
+          </div>
+          <div class="flex justify-between py-1 border-b border-gray-800">
+            <a href="/archive/workshop" class="hover:text-white">DJ Workshop Cohort</a>
+            <span class="text-gray-500">Workshop</span>
           </div>
         </div>
-      </div>
+        <p class="text-xs text-gray-500 mt-4">
+          <a href="/archive" class="hover:text-white">All archive →</a>
+        </p>
+      </section>
     </div>
-  </section>
-
-  <!-- Mission Section -->
-  <section class="bg-black text-white py-12 md:py-16">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <h2 class="text-3xl font-bold mb-6">Our Mission</h2>
-      <p class="text-xl text-gray-300 leading-relaxed mb-8">
-        Prioritizing emerging DJs and music creators, democratizing DJ practices, 
-        and providing alternative music education through workshops and skill development.
-      </p>
-      <a href="/about" class="inline-flex items-center px-6 py-3 border border-green-400 text-base font-medium rounded-md text-green-400 hover:bg-green-400 hover:text-black transition-colors">
-        Learn More
-      </a>
-    </div>
-  </section>
+  </div>
 </Layout>
