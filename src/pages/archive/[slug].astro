@@ -1,0 +1,262 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+// Placeholder data based on slug
+const getArchiveData = (slug: string) => {
+  const archiveMap = {
+    'triumvirate-photo': {
+      title: 'Triumvirate Photo',
+      type: 'photography',
+      date: new Date('2024-06-01'),
+      description: 'Photography series featuring model Paige Paton with 15 photographic images in a grid layout.',
+      body: `# Triumvirate Photo Series
+
+This photography series features model Paige Paton in a collaborative visual project that captures the artistic spirit of our community.
+
+## About the Series
+
+The Triumvirate Photo series showcases a range of photographic compositions and styles, representing the diverse creative expressions within the Places collective.
+
+### Featured Model
+
+**Paige Paton** brings her unique presence to this visual exploration, contributing to the collaborative nature of this artistic project.
+
+## Visual Presentation
+
+The series is presented in a clean, portfolio-style layout with 15 professional photographs displayed in a grid format, emphasizing visual storytelling through curated image selection.
+
+### Artistic Approach
+
+- Professional photography with documentary-style aesthetics
+- Multiple outfit and setting changes
+- Focus on visual narrative and artistic expression
+- Clean, minimalist presentation style
+
+This photography series represents our commitment to documenting and celebrating the creative community around Places.`
+    },
+    'workshop': {
+      title: 'Hear It From the Front - DJ Workshops',
+      type: 'workshop',
+      date: new Date('2024-04-30'),
+      description: 'DJ Workshop Cohort documentation. Three-month series with Hamilton Artists Inc. facilitated by Dunaway and Peachface Lovedeep.',
+      body: `# DJ Workshop Cohort
+
+A comprehensive three-month workshop series designed to provide hands-on DJ education and cultural conversation within the Hamilton music community.
+
+## Partnership
+
+This workshop series was developed in partnership with **Hamilton Artists Inc.**, bringing together educational resources and community space for emerging DJs.
+
+## Facilitators
+
+**Dunaway** and **Peachface Lovedeep** served as primary facilitators, bringing their expertise in both technical skills and cultural understanding of DJ practices.
+
+## Workshop Structure
+
+### February: "Setting the Dancefloor"
+- Introduction to DJ fundamentals
+- Understanding audience and environment
+- Basic mixing techniques
+- Cultural context and responsibility
+
+### March: "Pushing Buttons and Turning Knobs"
+- Advanced technical skills
+- Equipment familiarity and troubleshooting
+- Creative mixing approaches
+- Live practice sessions
+
+### April: Recap and Cultural Conversation
+- Integration of technical and cultural learning
+- Group reflection and discussion
+- Community building and networking
+- Future opportunities and next steps
+
+## Educational Resources
+
+Participants received access to:
+- Slide deck PDFs for each workshop session
+- Workshop documentation and images
+- YouTube recordings for reference
+- Recommended reading materials
+
+## Reflective Questions Explored
+
+Throughout the series, participants engaged with questions about:
+- The city's musical identity and local scenes
+- Personal listening habits and influences
+- The role and cultural significance of DJs
+- Community building through music
+
+## Reference Materials
+
+The workshop referenced "Document Your Culture: A Manual" by Emma Warren, providing additional context for the cultural aspects of DJ practice.
+
+This workshop series exemplifies our commitment to providing alternative music education that combines technical skill development with cultural understanding and community building.`
+    },
+    'music-for-thursday-july': {
+      title: 'Music for Thursday - July',
+      type: 'event',
+      date: new Date('2024-07-15'),
+      description: 'Music event archive featuring performances and community gathering documentation.',
+      body: `# Music for Thursday - July
+
+A special music event that brought together community members for an evening of performances and connection.
+
+## Event Overview
+
+This July event showcased local talent and provided a platform for community gathering and musical discovery.
+
+## Performances
+
+The evening featured diverse musical performances that highlighted the range of talent within our community.
+
+## Community Impact
+
+Events like Music for Thursday demonstrate our commitment to providing regular opportunities for artists to perform and audiences to discover new music.`
+    }
+  };
+  
+  return archiveMap[slug] || {
+    title: 'Archive Entry',
+    type: 'event',
+    date: new Date(),
+    description: 'Archive entry description would appear here.',
+    body: 'Archive content would appear here.'
+  };
+};
+
+export async function getStaticPaths() {
+  return [
+    { params: { slug: 'triumvirate-photo' } },
+    { params: { slug: 'workshop' } },
+    { params: { slug: 'music-for-thursday-july' } },
+  ];
+}
+
+const { slug } = Astro.params;
+const item = {
+  slug: slug,
+  data: getArchiveData(slug as string)
+};
+---
+
+<Layout title={`${item.data.title} - Archive - Places`}>
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <!-- Back Navigation -->
+    <nav class="mb-8">
+      <a 
+        href="/archive" 
+        class="inline-flex items-center text-blue-600 hover:text-blue-800 transition-colors"
+      >
+        ← Back to Archive
+      </a>
+    </nav>
+
+    <!-- Archive Header -->
+    <header class="mb-12">
+      <div class="bg-white rounded-lg shadow-md overflow-hidden">
+        <!-- Archive Image -->
+        <div class="h-64 md:h-80 relative overflow-hidden">
+          {item.data.type === 'photography' && (
+            <div class="h-full bg-gradient-to-br from-pink-400 via-purple-500 to-indigo-600"></div>
+          )}
+          {item.data.type === 'workshop' && (
+            <div class="h-full bg-gradient-to-br from-green-400 via-blue-500 to-teal-600"></div>
+          )}
+          {item.data.type === 'event' && (
+            <div class="h-full bg-gradient-to-br from-orange-400 via-red-500 to-pink-600"></div>
+          )}
+          
+          <div class="absolute inset-0 bg-black/20"></div>
+          
+          <!-- Type Badge -->
+          <div class="absolute top-6 left-6">
+            <span class="inline-flex items-center px-4 py-2 rounded-full text-sm font-medium bg-white/90 backdrop-blur-sm">
+              {item.data.type === 'photography' && '📸 Photography'}
+              {item.data.type === 'workshop' && '🎓 Workshop'}
+              {item.data.type === 'event' && '🎵 Event'}
+            </span>
+          </div>
+          
+          <!-- Title Overlay -->
+          <div class="absolute bottom-6 left-6 right-6">
+            <div class="bg-white/95 backdrop-blur-sm rounded-lg p-6">
+              <h1 class="text-2xl md:text-3xl font-bold text-gray-900 mb-2">
+                {item.data.title}
+              </h1>
+              <time class="text-lg text-gray-700" datetime={item.data.date.toISOString()}>
+                {item.data.date.toLocaleDateString('en-US', { 
+                  year: 'numeric', 
+                  month: 'long',
+                  day: 'numeric'
+                })}
+              </time>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Description -->
+        <div class="p-6 bg-gray-50 border-t">
+          <p class="text-blue-700 leading-relaxed">
+            {item.data.description}
+          </p>
+        </div>
+      </div>
+    </header>
+
+    <!-- Archive Content -->
+    <article class="prose prose-lg prose-blue max-w-none">
+      <div class="bg-white rounded-lg shadow-md p-8 md:p-12">
+        <div class="whitespace-pre-line text-blue-900 leading-relaxed">
+          {item.data.body}
+        </div>
+      </div>
+    </article>
+
+    <!-- Additional Images Section (for photography) -->
+    {item.data.type === 'photography' && (
+      <section class="mt-12">
+        <div class="bg-white rounded-lg shadow-md p-8">
+          <h2 class="text-2xl font-bold text-blue-900 mb-6">Photo Gallery</h2>
+          <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15].map((i) => (
+              <div class="aspect-square bg-gradient-to-br from-pink-300 to-purple-400 rounded-lg"></div>
+            ))}
+          </div>
+        </div>
+      </section>
+    )}
+
+    <!-- Share Actions -->
+    <div class="mt-12 text-center">
+      <button 
+        onclick="navigator.share ? navigator.share({title: document.title, url: window.location.href}) : navigator.clipboard.writeText(window.location.href)"
+        class="inline-flex items-center px-6 py-3 border border-blue-300 text-base font-medium rounded-md text-blue-700 bg-white hover:bg-blue-50 transition-colors"
+      >
+        📤 Share
+      </button>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="mt-12 flex justify-between items-center">
+      <a 
+        href="#" 
+        class="inline-flex items-center text-blue-600 hover:text-blue-800 transition-colors opacity-50 cursor-not-allowed"
+      >
+        ← Previous
+      </a>
+      <a 
+        href="/archive" 
+        class="inline-flex items-center px-4 py-2 border border-blue-300 text-sm font-medium rounded-md text-blue-700 bg-white hover:bg-blue-50 transition-colors"
+      >
+        All Archive
+      </a>
+      <a 
+        href="#" 
+        class="inline-flex items-center text-blue-600 hover:text-blue-800 transition-colors opacity-50 cursor-not-allowed"
+      >
+        Next →
+      </a>
+    </nav>
+  </div>
+</Layout>

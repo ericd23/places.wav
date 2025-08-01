@@ -1,0 +1,184 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+// Placeholder data based on slug
+const getConvoData = (slug: string) => {
+  const convoMap = {
+    'safetypanel': {
+      number: 7,
+      title: 'Safety in Dance and Club Culture',
+      participants: ['Mirand (SACHA)', 'TJ (SOPEN)', 'Aaron (volunteer)', 'Trina (volunteer)'],
+      date: new Date('2024-05-12'),
+      body: `This conversation explores the critical topic of safety in dance and club culture, featuring perspectives from community organizers and volunteers.
+
+## Panel Discussion
+
+Our panel brings together voices from different aspects of the nightlife and dance community to discuss how we can create safer spaces for everyone.
+
+### Key Topics Discussed
+
+- Creating inclusive and safe nightlife environments
+- Community accountability and support systems
+- The role of venues and organizers in promoting safety
+- How individuals can contribute to safer dance spaces
+
+### Participant Perspectives
+
+**Mirand (SACHA)** shares insights from organizing community events and the importance of proactive safety measures.
+
+**TJ (SOPEN)** discusses the role of music venues in creating safe environments for all attendees.
+
+**Aaron and Trina**, as dedicated volunteers, provide grassroots perspectives on community safety initiatives.
+
+This conversation is part of our ongoing commitment to fostering safe, inclusive spaces for music and dance culture.`
+    },
+    'convo-001-dj-abdi': {
+      number: 1,
+      title: 'DJ Abdi',
+      participants: ['DJ Abdi'],
+      date: new Date('2024-04-01'),
+      body: `Our inaugural conversation with DJ Abdi marks the beginning of our interview series exploring the diverse voices in Hamilton's music community.
+
+## About DJ Abdi
+
+DJ Abdi brings a unique perspective to Hamilton's electronic music scene, blending cultural influences with contemporary sounds.
+
+### Musical Journey
+
+In this conversation, we explore DJ Abdi's path into DJing, influences, and vision for community building through music.
+
+### Key Discussion Points
+
+- Getting started as a DJ in Hamilton
+- Cultural influences in music selection
+- Building community through DJ sets
+- The importance of representation in electronic music
+
+This first conversation sets the tone for our series, emphasizing the diverse voices and perspectives that make up our local music community.`
+    }
+  };
+  
+  return convoMap[slug] || {
+    number: 0,
+    title: 'Conversation',
+    participants: ['Unknown'],
+    date: new Date(),
+    body: 'Conversation content would appear here.'
+  };
+};
+
+export async function getStaticPaths() {
+  return [
+    { params: { slug: 'safetypanel' } },
+    { params: { slug: 'convo-006-hamiltonaire' } },
+    { params: { slug: '005' } },
+    { params: { slug: '4' } },
+    { params: { slug: 'convo-003-rental-joy' } },
+    { params: { slug: 'convo-01-crdj' } },
+    { params: { slug: 'convo-001-dj-abdi' } },
+  ];
+}
+
+const { slug } = Astro.params;
+const convo = {
+  slug: slug,
+  data: getConvoData(slug as string)
+};
+---
+
+<Layout title={`Convo ${convo.data.number.toString().padStart(3, '0')}: ${convo.data.title} - Places`}>
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <!-- Back Navigation -->
+    <nav class="mb-8">
+      <a 
+        href="/convo" 
+        class="inline-flex items-center text-blue-600 hover:text-blue-800 transition-colors"
+      >
+        ← Back to Conversations
+      </a>
+    </nav>
+
+    <!-- Conversation Header -->
+    <header class="mb-12">
+      <div class="bg-white rounded-lg shadow-md p-8 md:p-12">
+        <div class="flex items-start gap-6 mb-6">
+          <div class="flex-shrink-0">
+            <span class="inline-flex items-center px-4 py-2 rounded-full text-sm font-medium bg-blue-100 text-blue-800">
+              Convo {convo.data.number.toString().padStart(3, '0')}
+            </span>
+          </div>
+          <div class="flex-1">
+            <h1 class="text-3xl md:text-4xl font-bold text-blue-900 mb-4">
+              {convo.data.title}
+            </h1>
+            <div class="flex flex-col sm:flex-row sm:items-center gap-4 text-blue-700">
+              <div>
+                <strong>Participants:</strong> {convo.data.participants.join(', ')}
+              </div>
+              <div class="text-sm">
+                <time datetime={convo.data.date.toISOString()}>
+                  {convo.data.date.toLocaleDateString('en-US', { 
+                    year: 'numeric', 
+                    month: 'long',
+                    day: 'numeric'
+                  })}
+                </time>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Featured Image Placeholder -->
+        <div class="h-48 bg-gradient-to-br from-blue-400 to-purple-500 rounded-lg mb-6"></div>
+        
+        <!-- Share Actions -->
+        <div class="flex flex-col sm:flex-row gap-4 justify-center pt-6 border-t border-blue-100">
+          <button 
+            onclick="navigator.share ? navigator.share({title: document.title, url: window.location.href}) : navigator.clipboard.writeText(window.location.href)"
+            class="inline-flex items-center justify-center px-6 py-3 border border-blue-300 text-base font-medium rounded-md text-blue-700 bg-white hover:bg-blue-50 transition-colors"
+          >
+            📤 Share Conversation
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Conversation Content -->
+    <article class="prose prose-lg prose-blue max-w-none">
+      <div class="bg-white rounded-lg shadow-md p-8 md:p-12">
+        <div class="whitespace-pre-line text-blue-900 leading-relaxed">
+          {convo.data.body}
+        </div>
+      </div>
+    </article>
+
+    <!-- Series Navigation -->
+    <nav class="mt-12">
+      <div class="bg-blue-50 rounded-lg p-6">
+        <h3 class="text-lg font-semibold text-blue-900 mb-4 text-center">
+          Conversation Series
+        </h3>
+        <div class="flex justify-between items-center">
+          <a 
+            href="#" 
+            class="inline-flex items-center text-blue-600 hover:text-blue-800 transition-colors opacity-50 cursor-not-allowed"
+          >
+            ← Previous
+          </a>
+          <a 
+            href="/convo" 
+            class="inline-flex items-center px-4 py-2 border border-blue-300 text-sm font-medium rounded-md text-blue-700 bg-white hover:bg-blue-50 transition-colors"
+          >
+            All Conversations
+          </a>
+          <a 
+            href="#" 
+            class="inline-flex items-center text-blue-600 hover:text-blue-800 transition-colors opacity-50 cursor-not-allowed"
+          >
+            Next →
+          </a>
+        </div>
+      </div>
+    </nav>
+  </div>
+</Layout>

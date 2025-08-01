@@ -1,0 +1,219 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+// Placeholder data based on slug
+const getMixData = (slug: string) => {
+  const mixMap = {
+    'echomosa-june': {
+      title: 'EchöMosa x Places Wav - June',
+      artist: 'EchöMosa',
+      date: new Date('2024-06-15'),
+      tags: ['electronic', 'ambient'],
+      external_link: 'https://soundcloud.com/example',
+      body: `This collaborative mix between EchöMosa and Places showcases ambient electronic music with careful attention to atmosphere and texture.
+
+## About the Mix
+
+EchöMosa brings their unique approach to electronic composition, creating a sonic journey that explores the boundaries between ambient and experimental electronic music.
+
+## Tracklist
+
+1. Opening Ambience - EchöMosa
+2. Ethereal Progression - Various Artists
+3. Deep Resonance - Collaborative Track
+4. Closing Meditation - EchöMosa
+
+## About EchöMosa
+
+EchöMosa is an electronic music producer known for their atmospheric compositions and innovative use of spatial audio techniques.`
+    },
+    'blockletter-july': {
+      title: 'Blockletter x Places Wav - July',
+      artist: 'Blockletter',
+      date: new Date('2024-07-20'),
+      tags: ['techno', 'experimental'],
+      external_link: 'https://mixcloud.com/example',
+      body: `Blockletter delivers a powerful techno set that pushes boundaries while maintaining the groove that defines quality electronic music.
+
+## About the Mix
+
+This July collaboration showcases Blockletter's ability to blend experimental elements with driving techno rhythms, creating a dynamic listening experience.
+
+## Tracklist
+
+1. Industrial Opening - Blockletter
+2. Rhythmic Evolution - Various Artists
+3. Peak Time Energy - Collaborative Selection
+4. Atmospheric Closure - Blockletter
+
+## About Blockletter
+
+Blockletter is known for their innovative approach to techno production and their ability to create immersive sonic experiences.`
+    },
+    'aziza-places': {
+      title: 'azizA x Places Wav',
+      artist: 'azizA',
+      date: new Date('2024-05-10'),
+      tags: ['house', 'disco'],
+      external_link: 'https://soundcloud.com/example',
+      body: `azizA brings their signature house and disco sound to this collaborative mix, highlighting the joy and energy of dance music.
+
+## About the Mix
+
+This mix celebrates the roots of house music while incorporating contemporary disco influences, creating a perfect blend for both listening and dancing.
+
+## Tracklist
+
+1. Classic House Opening - azizA
+2. Disco Revival - Various Artists
+3. Modern House Fusion - Collaborative Track
+4. Feel Good Finale - azizA
+
+## About azizA
+
+azizA is a DJ and producer who specializes in house and disco music, known for their ability to create uplifting and energetic sets.`
+    }
+  };
+  
+  return mixMap[slug] || {
+    title: 'Sample Mix',
+    artist: 'Sample Artist',
+    date: new Date('2024-06-15'),
+    tags: ['electronic', 'ambient'],
+    external_link: 'https://soundcloud.com/example',
+    body: `This is a sample mix description. In a real implementation, this would contain detailed information about the mix, tracklist, and artist notes.
+
+## About the Mix
+
+This mix showcases the artist's unique style and approach to electronic music, featuring carefully selected tracks that create a cohesive listening experience.
+
+## Tracklist
+
+1. Track One - Artist Name
+2. Track Two - Another Artist  
+3. Track Three - Third Artist
+4. And so on...
+
+## About the Artist
+
+Information about the artist and their background would appear here.`
+  };
+};
+
+export async function getStaticPaths() {
+  return [
+    { params: { slug: 'echomosa-june' } },
+    { params: { slug: 'blockletter-july' } },
+    { params: { slug: 'aziza-places' } },
+  ];
+}
+
+const { slug } = Astro.params;
+const mix = {
+  slug: slug,
+  data: getMixData(slug as string)
+};
+---
+
+<Layout title={`${mix.data.title} - ${mix.data.artist} - Places`}>
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <!-- Back Navigation -->
+    <nav class="mb-8">
+      <a 
+        href="/mixes" 
+        class="inline-flex items-center text-blue-600 hover:text-blue-800 transition-colors"
+      >
+        ← Back to Mixes
+      </a>
+    </nav>
+
+    <!-- Mix Header -->
+    <header class="mb-12">
+      <div class="bg-white rounded-lg shadow-md overflow-hidden">
+        <!-- Mix Image -->
+        <div class="h-64 md:h-80 bg-gradient-to-br from-green-400 via-blue-500 to-purple-600 relative">
+          <div class="absolute inset-0 bg-black/20"></div>
+          <div class="absolute bottom-6 left-6 right-6">
+            <div class="bg-white/95 backdrop-blur-sm rounded-lg p-6">
+              <h1 class="text-2xl md:text-3xl font-bold text-gray-900 mb-2">
+                {mix.data.title}
+              </h1>
+              <p class="text-xl text-gray-700 mb-3">
+                by {mix.data.artist}
+              </p>
+              <div class="flex flex-wrap items-center gap-4">
+                <time class="text-sm text-gray-600" datetime={mix.data.date.toISOString()}>
+                  {mix.data.date.toLocaleDateString('en-US', { 
+                    year: 'numeric', 
+                    month: 'long',
+                    day: 'numeric'
+                  })}
+                </time>
+                {mix.data.tags && mix.data.tags.length > 0 && (
+                  <div class="flex flex-wrap gap-2">
+                    {mix.data.tags.map((tag) => (
+                      <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Actions -->
+        <div class="p-6 bg-gray-50 border-t">
+          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a 
+              href={mix.data.external_link || '#'} 
+              target="_blank" 
+              rel="noopener noreferrer"
+              class="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-green-500 hover:bg-green-600 transition-colors"
+            >
+              🎧 Listen on External Platform
+            </a>
+            <button 
+              onclick="navigator.share ? navigator.share({title: document.title, url: window.location.href}) : navigator.clipboard.writeText(window.location.href)"
+              class="inline-flex items-center justify-center px-6 py-3 border border-blue-300 text-base font-medium rounded-md text-blue-700 bg-white hover:bg-blue-50 transition-colors"
+            >
+              📤 Share
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Mix Content -->
+    <article class="prose prose-lg prose-blue max-w-none">
+      <div class="bg-white rounded-lg shadow-md p-8 md:p-12">
+        <div class="whitespace-pre-line text-blue-900 leading-relaxed">
+          {mix.body}
+        </div>
+      </div>
+    </article>
+
+    <!-- Navigation -->
+    <nav class="mt-12 flex justify-between items-center">
+      <a 
+        href="#" 
+        class="inline-flex items-center text-blue-600 hover:text-blue-800 transition-colors opacity-50 cursor-not-allowed"
+      >
+        ← Previous Mix
+      </a>
+      <a 
+        href="/mixes" 
+        class="inline-flex items-center px-4 py-2 border border-blue-300 text-sm font-medium rounded-md text-blue-700 bg-white hover:bg-blue-50 transition-colors"
+      >
+        All Mixes
+      </a>
+      <a 
+        href="#" 
+        class="inline-flex items-center text-blue-600 hover:text-blue-800 transition-colors opacity-50 cursor-not-allowed"
+      >
+        Next Mix →
+      </a>
+    </nav>
+  </div>
+</Layout>
