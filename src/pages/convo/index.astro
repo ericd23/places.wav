@@ -3,75 +3,8 @@ import Layout from '../../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
 
 // Get all conversations, sorted by number (newest first)
-// const conversations = await getCollection('conversations');
-// conversations.sort((a, b) => b.data.number - a.data.number);
-
-// Placeholder data based on Places analysis
-const conversations = [
-  {
-    slug: 'safetypanel',
-    data: {
-      number: 7,
-      title: 'Safety in Dance and Club Culture',
-      participants: ['Mirand (SACHA)', 'TJ (SOPEN)', 'Aaron (volunteer)', 'Trina (volunteer)'],
-      date: new Date('2024-05-12'),
-    }
-  },
-  {
-    slug: 'convo-006-hamiltonaire',
-    data: {
-      number: 6,
-      title: 'Hamiltonaire',
-      participants: ['Hamiltonaire'],
-      date: new Date('2024-04-20'),
-    }
-  },
-  {
-    slug: '005',
-    data: {
-      number: 5,
-      title: 'Peachface Lovedeep + Godemperor + blankchasm',
-      participants: ['Peachface Lovedeep', 'Godemperor', 'blankchasm'],
-      date: new Date('2024-04-15'),
-    }
-  },
-  {
-    slug: '4',
-    data: {
-      number: 4,
-      title: 'Dunaway + Peachface Love Deep + Woodland Bot',
-      participants: ['Dunaway', 'Peachface Love Deep', 'Woodland Bot'],
-      date: new Date('2024-04-10'),
-    }
-  },
-  {
-    slug: 'convo-003-rental-joy',
-    data: {
-      number: 3,
-      title: 'Rental Joy',
-      participants: ['Rental Joy'],
-      date: new Date('2024-04-05'),
-    }
-  },
-  {
-    slug: 'convo-01-crdj',
-    data: {
-      number: 2,
-      title: 'crdj',
-      participants: ['crdj'],
-      date: new Date('2024-04-02'),
-    }
-  },
-  {
-    slug: 'convo-001-dj-abdi',
-    data: {
-      number: 1,
-      title: 'DJ Abdi',
-      participants: ['DJ Abdi'],
-      date: new Date('2024-04-01'),
-    }
-  }
-];
+const conversations = await getCollection('conversations');
+conversations.sort((a, b) => b.data.number - a.data.number);
 ---
 
 <Layout title="Conversations - Places" description="Interviews and conversations with DJs, artists, and community members">
@@ -80,15 +13,15 @@ const conversations = [
     
     <div class="space-y-4">
       {conversations.map((convo) => (
-        <div class="border-b border-gray-800 pb-4">
+        <div class="border-b border-gray-200 pb-4">
           <div class="flex justify-between items-start mb-2">
             <div>
               <h2 class="text-lg mb-1">
-                <a href={`/convo/${convo.slug}`} class="hover:text-gray-300">
+                <a href={`/convo/${convo.slug}`} class="hover:text-gray-600">
                   {convo.data.number.toString().padStart(3, '0')}: {convo.data.title}
                 </a>
               </h2>
-              <p class="text-sm text-gray-400">{convo.data.participants.join(', ')}</p>
+              <p class="text-sm text-gray-600">{convo.data.participants.join(', ')}</p>
             </div>
             <span class="text-xs text-gray-500">
               {convo.data.date.toLocaleDateString('en-US', { 

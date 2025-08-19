@@ -1,124 +1,24 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 
-// Placeholder data based on slug
-const getMixData = (slug: string) => {
-  const mixMap = {
-    'echomosa-june': {
-      title: 'EchöMosa x Places Wav - June',
-      artist: 'EchöMosa',
-      date: new Date('2024-06-15'),
-      tags: ['electronic', 'ambient'],
-      external_link: 'https://soundcloud.com/example',
-      body: `This collaborative mix between EchöMosa and Places showcases ambient electronic music with careful attention to atmosphere and texture.
-
-## About the Mix
-
-EchöMosa brings their unique approach to electronic composition, creating a sonic journey that explores the boundaries between ambient and experimental electronic music.
-
-## Tracklist
-
-1. Opening Ambience - EchöMosa
-2. Ethereal Progression - Various Artists
-3. Deep Resonance - Collaborative Track
-4. Closing Meditation - EchöMosa
-
-## About EchöMosa
-
-EchöMosa is an electronic music producer known for their atmospheric compositions and innovative use of spatial audio techniques.`
-    },
-    'blockletter-july': {
-      title: 'Blockletter x Places Wav - July',
-      artist: 'Blockletter',
-      date: new Date('2024-07-20'),
-      tags: ['techno', 'experimental'],
-      external_link: 'https://mixcloud.com/example',
-      body: `Blockletter delivers a powerful techno set that pushes boundaries while maintaining the groove that defines quality electronic music.
-
-## About the Mix
-
-This July collaboration showcases Blockletter's ability to blend experimental elements with driving techno rhythms, creating a dynamic listening experience.
-
-## Tracklist
-
-1. Industrial Opening - Blockletter
-2. Rhythmic Evolution - Various Artists
-3. Peak Time Energy - Collaborative Selection
-4. Atmospheric Closure - Blockletter
-
-## About Blockletter
-
-Blockletter is known for their innovative approach to techno production and their ability to create immersive sonic experiences.`
-    },
-    'aziza-places': {
-      title: 'azizA x Places Wav',
-      artist: 'azizA',
-      date: new Date('2024-05-10'),
-      tags: ['house', 'disco'],
-      external_link: 'https://soundcloud.com/example',
-      body: `azizA brings their signature house and disco sound to this collaborative mix, highlighting the joy and energy of dance music.
-
-## About the Mix
-
-This mix celebrates the roots of house music while incorporating contemporary disco influences, creating a perfect blend for both listening and dancing.
-
-## Tracklist
-
-1. Classic House Opening - azizA
-2. Disco Revival - Various Artists
-3. Modern House Fusion - Collaborative Track
-4. Feel Good Finale - azizA
-
-## About azizA
-
-azizA is a DJ and producer who specializes in house and disco music, known for their ability to create uplifting and energetic sets.`
-    }
-  };
-  
-  return mixMap[slug] || {
-    title: 'Sample Mix',
-    artist: 'Sample Artist',
-    date: new Date('2024-06-15'),
-    tags: ['electronic', 'ambient'],
-    external_link: 'https://soundcloud.com/example',
-    body: `This is a sample mix description. In a real implementation, this would contain detailed information about the mix, tracklist, and artist notes.
-
-## About the Mix
-
-This mix showcases the artist's unique style and approach to electronic music, featuring carefully selected tracks that create a cohesive listening experience.
-
-## Tracklist
-
-1. Track One - Artist Name
-2. Track Two - Another Artist  
-3. Track Three - Third Artist
-4. And so on...
-
-## About the Artist
-
-Information about the artist and their background would appear here.`
-  };
-};
+import { getCollection } from 'astro:content';
 
 export async function getStaticPaths() {
-  return [
-    { params: { slug: 'echomosa-june' } },
-    { params: { slug: 'blockletter-july' } },
-    { params: { slug: 'aziza-places' } },
-  ];
+  const mixes = await getCollection('mixes');
+  return mixes.map((mix) => ({
+    params: { slug: mix.slug },
+    props: { mix },
+  }));
 }
 
-const { slug } = Astro.params;
-const mix = {
-  slug: slug,
-  data: getMixData(slug as string)
-};
+const { mix } = Astro.props;
+const { Content } = await mix.render();
 ---
 
 <Layout title={`${mix.data.title} - ${mix.data.artist} - Places`}>
   <div class="p-4 max-w-2xl">
     <nav class="mb-8">
-      <a href="/mixes" class="text-gray-400 hover:text-white text-sm">
+      <a href="/mixes" class="text-gray-600 hover:text-black text-sm">
         ← Back
       </a>
     </nav>
@@ -127,7 +27,7 @@ const mix = {
       <h1 class="text-2xl mb-2">
         {mix.data.title}
       </h1>
-      <div class="text-sm text-gray-400 mb-4">
+      <div class="text-sm text-gray-600 mb-4">
         by {mix.data.artist}
       </div>
       <div class="flex justify-between items-center mb-4">
@@ -153,21 +53,21 @@ const mix = {
           href={mix.data.external_link || '#'} 
           target="_blank" 
           rel="noopener noreferrer"
-          class="text-gray-400 hover:text-white text-sm"
+          class="text-gray-600 hover:text-black text-sm"
         >
           Listen
         </a>
       </div>
     </header>
 
-    <article class="text-sm leading-relaxed text-gray-300">
-      <div class="whitespace-pre-line">
-        {mix.data.body}
+    <article class="text-sm leading-relaxed text-gray-700">
+      <div class="prose prose-sm max-w-none">
+        <Content />
       </div>
     </article>
 
-    <nav class="mt-8 pt-4 border-t border-gray-800">
-      <a href="/mixes" class="text-gray-400 hover:text-white text-sm">
+    <nav class="mt-8 pt-4 border-t border-gray-200">
+      <a href="/mixes" class="text-gray-600 hover:text-black text-sm">
         All mixes
       </a>
     </nav>

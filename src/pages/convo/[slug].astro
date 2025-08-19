@@ -1,95 +1,24 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 
-// Placeholder data based on slug
-const getConvoData = (slug: string) => {
-  const convoMap = {
-    'safetypanel': {
-      number: 7,
-      title: 'Safety in Dance and Club Culture',
-      participants: ['Mirand (SACHA)', 'TJ (SOPEN)', 'Aaron (volunteer)', 'Trina (volunteer)'],
-      date: new Date('2024-05-12'),
-      body: `This conversation explores the critical topic of safety in dance and club culture, featuring perspectives from community organizers and volunteers.
-
-## Panel Discussion
-
-Our panel brings together voices from different aspects of the nightlife and dance community to discuss how we can create safer spaces for everyone.
-
-### Key Topics Discussed
-
-- Creating inclusive and safe nightlife environments
-- Community accountability and support systems
-- The role of venues and organizers in promoting safety
-- How individuals can contribute to safer dance spaces
-
-### Participant Perspectives
-
-**Mirand (SACHA)** shares insights from organizing community events and the importance of proactive safety measures.
-
-**TJ (SOPEN)** discusses the role of music venues in creating safe environments for all attendees.
-
-**Aaron and Trina**, as dedicated volunteers, provide grassroots perspectives on community safety initiatives.
-
-This conversation is part of our ongoing commitment to fostering safe, inclusive spaces for music and dance culture.`
-    },
-    'convo-001-dj-abdi': {
-      number: 1,
-      title: 'DJ Abdi',
-      participants: ['DJ Abdi'],
-      date: new Date('2024-04-01'),
-      body: `Our inaugural conversation with DJ Abdi marks the beginning of our interview series exploring the diverse voices in Hamilton's music community.
-
-## About DJ Abdi
-
-DJ Abdi brings a unique perspective to Hamilton's electronic music scene, blending cultural influences with contemporary sounds.
-
-### Musical Journey
-
-In this conversation, we explore DJ Abdi's path into DJing, influences, and vision for community building through music.
-
-### Key Discussion Points
-
-- Getting started as a DJ in Hamilton
-- Cultural influences in music selection
-- Building community through DJ sets
-- The importance of representation in electronic music
-
-This first conversation sets the tone for our series, emphasizing the diverse voices and perspectives that make up our local music community.`
-    }
-  };
-  
-  return convoMap[slug] || {
-    number: 0,
-    title: 'Conversation',
-    participants: ['Unknown'],
-    date: new Date(),
-    body: 'Conversation content would appear here.'
-  };
-};
+import { getCollection } from 'astro:content';
 
 export async function getStaticPaths() {
-  return [
-    { params: { slug: 'safetypanel' } },
-    { params: { slug: 'convo-006-hamiltonaire' } },
-    { params: { slug: '005' } },
-    { params: { slug: '4' } },
-    { params: { slug: 'convo-003-rental-joy' } },
-    { params: { slug: 'convo-01-crdj' } },
-    { params: { slug: 'convo-001-dj-abdi' } },
-  ];
+  const conversations = await getCollection('conversations');
+  return conversations.map((convo) => ({
+    params: { slug: convo.slug },
+    props: { convo },
+  }));
 }
 
-const { slug } = Astro.params;
-const convo = {
-  slug: slug,
-  data: getConvoData(slug as string)
-};
+const { convo } = Astro.props;
+const { Content } = await convo.render();
 ---
 
 <Layout title={`Convo ${convo.data.number.toString().padStart(3, '0')}: ${convo.data.title} - Places`}>
   <div class="p-4 max-w-2xl">
     <nav class="mb-8">
-      <a href="/convo" class="text-gray-400 hover:text-white text-sm">
+      <a href="/convo" class="text-gray-600 hover:text-black text-sm">
         ← Back
       </a>
     </nav>
@@ -98,7 +27,7 @@ const convo = {
       <h1 class="text-2xl mb-2">
         Convo {convo.data.number.toString().padStart(3, '0')}: {convo.data.title}
       </h1>
-      <div class="text-sm text-gray-400 mb-4">
+      <div class="text-sm text-gray-600 mb-4">
         {convo.data.participants.join(', ')}
       </div>
       <div class="text-xs text-gray-500">
@@ -110,14 +39,14 @@ const convo = {
       </div>
     </header>
 
-    <article class="text-sm leading-relaxed text-gray-300">
-      <div class="whitespace-pre-line">
-        {convo.data.body}
+    <article class="text-sm leading-relaxed text-gray-700">
+      <div class="prose prose-sm max-w-none">
+        <Content />
       </div>
     </article>
 
-    <nav class="mt-8 pt-4 border-t border-gray-800">
-      <a href="/convo" class="text-gray-400 hover:text-white text-sm">
+    <nav class="mt-8 pt-4 border-t border-gray-200">
+      <a href="/convo" class="text-gray-600 hover:text-black text-sm">
         All conversations
       </a>
     </nav>

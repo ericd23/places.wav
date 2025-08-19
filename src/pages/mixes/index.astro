@@ -3,42 +3,8 @@ import Layout from '../../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
 
 // Get all mixes, sorted by date (newest first)
-// const mixes = await getCollection('mixes');
-// mixes.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
-
-// Placeholder data until we add real content
-const mixes = [
-  {
-    slug: 'echomosa-june',
-    data: {
-      title: 'EchöMosa x Places Wav - June',
-      artist: 'EchöMosa',
-      date: new Date('2024-06-15'),
-      tags: ['electronic', 'ambient'],
-      external_link: 'https://soundcloud.com/example'
-    }
-  },
-  {
-    slug: 'blockletter-july',
-    data: {
-      title: 'Blockletter x Places Wav - July',
-      artist: 'Blockletter',
-      date: new Date('2024-07-20'),
-      tags: ['techno', 'experimental'],
-      external_link: 'https://mixcloud.com/example'
-    }
-  },
-  {
-    slug: 'aziza-places',
-    data: {
-      title: 'azizA x Places Wav',
-      artist: 'azizA',
-      date: new Date('2024-05-10'),
-      tags: ['house', 'disco'],
-      external_link: 'https://soundcloud.com/example'
-    }
-  }
-];
+const mixes = await getCollection('mixes');
+mixes.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 ---
 
 <Layout title="Mixes">
@@ -47,15 +13,15 @@ const mixes = [
     
     <div class="space-y-4">
       {mixes.map((mix) => (
-        <div class="border-b border-gray-800 pb-4">
+        <div class="border-b border-gray-200 pb-4">
           <div class="flex justify-between items-start mb-2">
             <div>
               <h2 class="text-lg mb-1">
-                <a href={`/mixes/${mix.slug}`} class="hover:text-gray-300">
+                <a href={`/mixes/${mix.slug}`} class="hover:text-gray-600">
                   {mix.data.title}
                 </a>
               </h2>
-              <p class="text-sm text-gray-400">{mix.data.artist}</p>
+              <p class="text-sm text-gray-600">{mix.data.artist}</p>
             </div>
             <span class="text-xs text-gray-500">
               {mix.data.date.toLocaleDateString('en-US', { 
@@ -80,13 +46,13 @@ const mixes = [
               href={mix.data.external_link || '#'} 
               target="_blank" 
               rel="noopener noreferrer"
-              class="text-gray-400 hover:text-white"
+              class="text-gray-600 hover:text-black"
             >
               Listen
             </a>
             <a 
               href={`/mixes/${mix.slug}`}
-              class="text-gray-400 hover:text-white"
+              class="text-gray-600 hover:text-black"
             >
               Details
             </a>

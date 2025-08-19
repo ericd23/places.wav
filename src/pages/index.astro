@@ -2,17 +2,25 @@
 import Layout from '../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
 
-// Get featured content (we'll add sample content later)
-// const featuredMixes = await getCollection('mixes', ({ data }) => data.featured);
-// const featuredConversations = await getCollection('conversations', ({ data }) => data.featured);
-// const featuredArchive = await getCollection('archive', ({ data }) => data.featured);
+// Get latest content
+const mixes = await getCollection('mixes');
+mixes.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const latestMixes = mixes.slice(0, 3);
+
+const conversations = await getCollection('conversations');
+conversations.sort((a, b) => b.data.number - a.data.number);
+const latestConversations = conversations.slice(0, 3);
+
+const archives = await getCollection('archive');
+archives.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const latestArchives = archives.slice(0, 2);
 ---
 
 <Layout title="Places">
   <div class="p-4 max-w-2xl">
     <div class="mb-8">
       <h1 class="text-2xl mb-4">Places</h1>
-      <p class="text-gray-400 mb-8">
+      <p class="text-gray-600 mb-8">
         Hamilton DJ collective. Democratizing DJ practices and music education.
       </p>
     </div>
@@ -21,59 +29,51 @@ import { getCollection } from 'astro:content';
       <section>
         <h2 class="text-lg mb-4">Latest Mixes</h2>
         <div class="space-y-2 text-sm">
-          <div class="flex justify-between py-1 border-b border-gray-800">
-            <a href="/mixes/echomosa-june" class="hover:text-white">EchöMosa x Places - June</a>
-            <span class="text-gray-500">June 2024</span>
-          </div>
-          <div class="flex justify-between py-1 border-b border-gray-800">
-            <a href="/mixes/blockletter-july" class="hover:text-white">Blockletter x Places - July</a>
-            <span class="text-gray-500">July 2024</span>
-          </div>
-          <div class="flex justify-between py-1 border-b border-gray-800">
-            <a href="/mixes/aziza-places" class="hover:text-white">azizA x Places</a>
-            <span class="text-gray-500">May 2024</span>
-          </div>
+          {latestMixes.map((mix) => (
+            <div class="flex justify-between py-1 border-b border-gray-200">
+              <a href={`/mixes/${mix.slug}`} class="hover:text-gray-600">{mix.data.title}</a>
+              <span class="text-gray-500">{mix.data.date.toLocaleDateString('en-US', { 
+                year: 'numeric', 
+                month: 'short'
+              })}</span>
+            </div>
+          ))}
         </div>
         <p class="text-xs text-gray-500 mt-4">
-          <a href="/mixes" class="hover:text-white">All mixes →</a>
+          <a href="/mixes" class="hover:text-black">All mixes →</a>
         </p>
       </section>
 
       <section>
         <h2 class="text-lg mb-4">Latest Conversations</h2>
         <div class="space-y-2 text-sm">
-          <div class="flex justify-between py-1 border-b border-gray-800">
-            <a href="/convo/safetypanel" class="hover:text-white">Convo 007: Safety in Dance Culture</a>
-            <span class="text-gray-500">May 2024</span>
-          </div>
-          <div class="flex justify-between py-1 border-b border-gray-800">
-            <a href="/convo/convo-006-hamiltonaire" class="hover:text-white">Convo 006: Hamiltonaire</a>
-            <span class="text-gray-500">Apr 2024</span>
-          </div>
-          <div class="flex justify-between py-1 border-b border-gray-800">
-            <a href="/convo/convo-001-dj-abdi" class="hover:text-white">Convo 001: DJ Abdi</a>
-            <span class="text-gray-500">Apr 2024</span>
-          </div>
+          {latestConversations.map((convo) => (
+            <div class="flex justify-between py-1 border-b border-gray-200">
+              <a href={`/convo/${convo.slug}`} class="hover:text-gray-600">Convo {convo.data.number.toString().padStart(3, '0')}: {convo.data.title}</a>
+              <span class="text-gray-500">{convo.data.date.toLocaleDateString('en-US', { 
+                year: 'numeric', 
+                month: 'short'
+              })}</span>
+            </div>
+          ))}
         </div>
         <p class="text-xs text-gray-500 mt-4">
-          <a href="/convo" class="hover:text-white">All conversations →</a>
+          <a href="/convo" class="hover:text-black">All conversations →</a>
         </p>
       </section>
 
       <section>
         <h2 class="text-lg mb-4">Recent Archive</h2>
         <div class="space-y-2 text-sm">
-          <div class="flex justify-between py-1 border-b border-gray-800">
-            <a href="/archive/triumvirate-photo" class="hover:text-white">Triumvirate Photo Series</a>
-            <span class="text-gray-500">Photography</span>
-          </div>
-          <div class="flex justify-between py-1 border-b border-gray-800">
-            <a href="/archive/workshop" class="hover:text-white">DJ Workshop Cohort</a>
-            <span class="text-gray-500">Workshop</span>
-          </div>
+          {latestArchives.map((item) => (
+            <div class="flex justify-between py-1 border-b border-gray-200">
+              <a href={`/archive/${item.slug}`} class="hover:text-gray-600">{item.data.title}</a>
+              <span class="text-gray-500">{item.data.type}</span>
+            </div>
+          ))}
         </div>
         <p class="text-xs text-gray-500 mt-4">
-          <a href="/archive" class="hover:text-white">All archive →</a>
+          <a href="/archive" class="hover:text-black">All archive →</a>
         </p>
       </section>
     </div>
