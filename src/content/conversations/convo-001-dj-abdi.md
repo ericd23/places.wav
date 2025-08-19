@@ -3,6 +3,7 @@ number: 1
 title: "DJ Abdi"
 participants: ["DJ Abdi"]
 date: 2024-04-01
+tags: ["dj", "community", "founding"]
 featured: false
 ---
 

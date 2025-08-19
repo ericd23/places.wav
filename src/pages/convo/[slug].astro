@@ -30,12 +30,26 @@ const { Content } = await convo.render();
       <div class="text-sm text-gray-600 mb-4">
         {convo.data.participants.join(', ')}
       </div>
-      <div class="text-xs text-gray-500">
-        {convo.data.date.toLocaleDateString('en-US', { 
-          year: 'numeric', 
-          month: 'long',
-          day: 'numeric'
-        })}
+      <div class="flex justify-between items-center mb-4">
+        <div class="text-xs text-gray-500">
+          {convo.data.date.toLocaleDateString('en-US', { 
+            year: 'numeric', 
+            month: 'long',
+            day: 'numeric'
+          })}
+        </div>
+        {convo.data.tags && convo.data.tags.length > 0 && (
+          <div class="flex gap-2">
+            {convo.data.tags.map((tag) => (
+              <a 
+                href={`/tags/${tag}`}
+                class="text-xs text-gray-500 hover:text-black"
+              >
+                #{tag}
+              </a>
+            ))}
+          </div>
+        )}
       </div>
     </header>
 

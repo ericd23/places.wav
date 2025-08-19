@@ -4,6 +4,7 @@ type: "photography"
 date: 2024-06-01
 images: ["/placeholder-photo.jpg"]
 description: "Photography series featuring model Paige Paton with 15 photographic images in a grid layout."
+tags: ["photography", "portrait", "visual-art", "collaboration"]
 featured: false
 ---
 

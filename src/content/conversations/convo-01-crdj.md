@@ -3,6 +3,7 @@ number: 2
 title: "crdj"
 participants: ["crdj"]
 date: 2024-04-02
+tags: ["dj", "curation", "community"]
 featured: false
 ---
 

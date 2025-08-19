@@ -21,6 +21,7 @@ const conversationsCollection = defineCollection({
     participants: z.array(z.string()),
     date: z.date(),
     image: z.string().optional(),
+    tags: z.array(z.string()).default([]),
     featured: z.boolean().default(false),
   }),
 });
@@ -33,6 +34,7 @@ const archiveCollection = defineCollection({
     date: z.date(),
     images: z.array(z.string()).default([]),
     description: z.string(),
+    tags: z.array(z.string()).default([]),
     featured: z.boolean().default(false),
   }),
 });

@@ -30,6 +30,19 @@ conversations.sort((a, b) => b.data.number - a.data.number);
               })}
             </span>
           </div>
+          
+          {convo.data.tags && convo.data.tags.length > 0 && (
+            <div class="flex flex-wrap gap-2 mb-3">
+              {convo.data.tags.map((tag) => (
+                <a 
+                  href={`/tags/${tag}`}
+                  class="text-xs text-gray-500 hover:text-black"
+                >
+                  #{tag}
+                </a>
+              ))}
+            </div>
+          )}
         </div>
       ))}
     </div>

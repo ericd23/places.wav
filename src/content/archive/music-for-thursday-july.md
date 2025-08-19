@@ -4,6 +4,7 @@ type: "event"
 date: 2024-07-15
 images: ["/placeholder-event.jpg"]
 description: "Music event archive featuring performances and community gathering documentation."
+tags: ["event", "performance", "community", "music"]
 featured: false
 ---
 

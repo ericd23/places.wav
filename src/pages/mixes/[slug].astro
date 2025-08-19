@@ -41,9 +41,12 @@ const { Content } = await mix.render();
         {mix.data.tags && mix.data.tags.length > 0 && (
           <div class="flex gap-2">
             {mix.data.tags.map((tag) => (
-              <span class="text-xs text-gray-500">
-                {tag}
-              </span>
+              <a 
+                href={`/tags/${tag}`}
+                class="text-xs text-gray-500 hover:text-black"
+              >
+                #{tag}
+              </a>
             ))}
           </div>
         )}

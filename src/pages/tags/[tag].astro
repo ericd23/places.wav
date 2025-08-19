@@ -1,0 +1,181 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const mixes = await getCollection('mixes');
+  const conversations = await getCollection('conversations');
+  const archives = await getCollection('archive');
+  
+  // Collect all unique tags
+  const allTags = new Set();
+  
+  [...mixes, ...conversations, ...archives].forEach(item => {
+    if (item.data.tags) {
+      item.data.tags.forEach(tag => allTags.add(tag));
+    }
+  });
+  
+  return Array.from(allTags).map(tag => ({
+    params: { tag },
+    props: {
+      tag,
+      mixes: mixes.filter(mix => mix.data.tags?.includes(tag)),
+      conversations: conversations.filter(convo => convo.data.tags?.includes(tag)),
+      archives: archives.filter(archive => archive.data.tags?.includes(tag))
+    }
+  }));
+}
+
+const { tag, mixes, conversations, archives } = Astro.props;
+const totalCount = mixes.length + conversations.length + archives.length;
+---
+
+<Layout title={`Tag: ${tag} - Places`}>
+  <div class="p-4 max-w-2xl">
+    <nav class="mb-8">
+      <a href="/tags" class="text-gray-600 hover:text-black text-sm">
+        ← All tags
+      </a>
+    </nav>
+
+    <header class="mb-8">
+      <h1 class="text-2xl mb-2">#{tag}</h1>
+      <p class="text-sm text-gray-600">
+        {totalCount} item{totalCount !== 1 ? 's' : ''} tagged with "{tag}"
+      </p>
+    </header>
+
+    <div class="space-y-12">
+      {mixes.length > 0 && (
+        <section>
+          <h2 class="text-lg mb-4">Mixes ({mixes.length})</h2>
+          <div class="space-y-4">
+            {mixes.map((mix) => (
+              <div class="border-b border-gray-200 pb-4">
+                <div class="flex justify-between items-start mb-2">
+                  <div>
+                    <h3 class="text-lg mb-1">
+                      <a href={`/mixes/${mix.slug}`} class="hover:text-gray-600">
+                        {mix.data.title}
+                      </a>
+                    </h3>
+                    <p class="text-sm text-gray-600">{mix.data.artist}</p>
+                  </div>
+                  <span class="text-xs text-gray-500">
+                    {mix.data.date.toLocaleDateString('en-US', { 
+                      year: 'numeric', 
+                      month: 'short'
+                    })}
+                  </span>
+                </div>
+                
+                {mix.data.tags && mix.data.tags.length > 0 && (
+                  <div class="flex flex-wrap gap-2 mb-3">
+                    {mix.data.tags.map((mixTag) => (
+                      <a 
+                        href={`/tags/${mixTag}`}
+                        class={`text-xs ${mixTag === tag ? 'text-black font-medium' : 'text-gray-500 hover:text-black'}`}
+                      >
+                        #{mixTag}
+                      </a>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {conversations.length > 0 && (
+        <section>
+          <h2 class="text-lg mb-4">Conversations ({conversations.length})</h2>
+          <div class="space-y-4">
+            {conversations.map((convo) => (
+              <div class="border-b border-gray-200 pb-4">
+                <div class="flex justify-between items-start mb-2">
+                  <div>
+                    <h3 class="text-lg mb-1">
+                      <a href={`/convo/${convo.slug}`} class="hover:text-gray-600">
+                        Convo {convo.data.number.toString().padStart(3, '0')}: {convo.data.title}
+                      </a>
+                    </h3>
+                    <p class="text-sm text-gray-600">{convo.data.participants.join(', ')}</p>
+                  </div>
+                  <span class="text-xs text-gray-500">
+                    {convo.data.date.toLocaleDateString('en-US', { 
+                      year: 'numeric', 
+                      month: 'short'
+                    })}
+                  </span>
+                </div>
+                
+                {convo.data.tags && convo.data.tags.length > 0 && (
+                  <div class="flex flex-wrap gap-2 mb-3">
+                    {convo.data.tags.map((convoTag) => (
+                      <a 
+                        href={`/tags/${convoTag}`}
+                        class={`text-xs ${convoTag === tag ? 'text-black font-medium' : 'text-gray-500 hover:text-black'}`}
+                      >
+                        #{convoTag}
+                      </a>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {archives.length > 0 && (
+        <section>
+          <h2 class="text-lg mb-4">Archive ({archives.length})</h2>
+          <div class="space-y-4">
+            {archives.map((item) => (
+              <div class="border-b border-gray-200 pb-4">
+                <div class="flex justify-between items-start mb-2">
+                  <div>
+                    <h3 class="text-lg mb-1">
+                      <a href={`/archive/${item.slug}`} class="hover:text-gray-600">
+                        {item.data.title}
+                      </a>
+                    </h3>
+                    <p class="text-sm text-gray-600">{item.data.type}</p>
+                  </div>
+                  <span class="text-xs text-gray-500">
+                    {item.data.date.toLocaleDateString('en-US', { 
+                      year: 'numeric', 
+                      month: 'short'
+                    })}
+                  </span>
+                </div>
+                <p class="text-xs text-gray-500 mt-2 mb-3">
+                  {item.data.description}
+                </p>
+                
+                {item.data.tags && item.data.tags.length > 0 && (
+                  <div class="flex flex-wrap gap-2">
+                    {item.data.tags.map((archiveTag) => (
+                      <a 
+                        href={`/tags/${archiveTag}`}
+                        class={`text-xs ${archiveTag === tag ? 'text-black font-medium' : 'text-gray-500 hover:text-black'}`}
+                      >
+                        #{archiveTag}
+                      </a>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+    </div>
+
+    {totalCount === 0 && (
+      <p class="text-gray-500 text-sm">No content found with this tag.</p>
+    )}
+  </div>
+</Layout>

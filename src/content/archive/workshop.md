@@ -4,6 +4,7 @@ type: "workshop"
 date: 2024-04-30
 images: ["/placeholder-workshop.jpg"]
 description: "DJ Workshop Cohort documentation. Three-month series with Hamilton Artists Inc. facilitated by Dunaway and Peachface Lovedeep."
+tags: ["education", "workshop", "dj", "community", "partnership"]
 featured: false
 ---
 
