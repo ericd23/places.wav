@@ -1,5 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import EmbedPlayer from '../../components/EmbedPlayer.astro';
 
 import { getCollection } from 'astro:content';
 
@@ -54,6 +55,10 @@ const { Content } = await item.render();
         </div>
       )}
     </header>
+
+    {item.data.embed_url && (
+      <EmbedPlayer url={item.data.embed_url} />
+    )}
 
     <article class="text-sm leading-relaxed text-gray-700">
       <div class="prose prose-sm max-w-none">

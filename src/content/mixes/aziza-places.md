@@ -4,6 +4,7 @@ artist: "azizA"
 date: 2024-05-10
 image: ""
 external_link: "https://soundcloud.com/example"
+embed_url: "https://soundcloud.com/dunawayy/aziza-072425"
 tags: ["house", "disco"]
 featured: false
 ---
