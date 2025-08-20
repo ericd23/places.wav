@@ -72,7 +72,8 @@
 }
 
 .markdown-body a:hover {
-  text-decoration: none;
+  text-decoration: underline;
+  cursor: crosshair;
 }
 
 .markdown-body strong {
@@ -86,4 +87,5 @@
 /* Global link hover effects */
 a:hover {
   text-decoration: underline;
+  cursor: pointer;
 }

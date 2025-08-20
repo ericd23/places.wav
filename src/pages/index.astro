@@ -6,15 +6,15 @@ import { getCollection } from 'astro:content';
 // Get latest content
 const mixes = await getCollection('mixes');
 mixes.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
-const latestMixes = mixes.slice(0, 3);
+const latestMixes = mixes.slice(0, 5);
 
 const conversations = await getCollection('conversations');
 conversations.sort((a, b) => b.data.number - a.data.number);
-const latestConversations = conversations.slice(0, 3);
+const latestConversations = conversations.slice(0, 5);
 
 const archives = await getCollection('archive');
 archives.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
-const latestArchives = archives.slice(0, 2);
+const latestArchives = archives.slice(0, 5);
 ---
 
 <Layout title="Places" variant="wide">
@@ -31,27 +31,27 @@ const latestArchives = archives.slice(0, 2);
         <div class="flex flex-wrap gap-6">
           {latestMixes.map((mix) => (
             <div class="group" style="width: 200px;">
-              <a href={`/mixes/${mix.slug}`} class="block">
-                <div class="mb-3">
-                  <CoverImage 
-                    collection="mixes"
-                    slug={mix.slug}
-                    cover={mix.data.cover}
-                    alt={`${mix.data.title} by ${mix.data.artist}`}
-                    class="w-full"
-                  />
-                </div>
+              <a href={`/mixes/${mix.slug}`} class="block mb-3">
+                <CoverImage 
+                  collection="mixes"
+                  slug={mix.slug}
+                  cover={mix.data.cover}
+                  alt={`${mix.data.title} by ${mix.data.artist}`}
+                  class="w-full"
+                />
+              </a>
+              <a href={`/mixes/${mix.slug}`}>
                 <h3 class="text-lg mb-1 group-hover:text-gray-700">
                   {mix.data.title}
                 </h3>
-                <p class="text-sm text-gray-700 mb-1">{mix.data.artist}</p>
-                <p class="text-xs text-gray-500">
-                  {mix.data.date.toLocaleDateString('en-US', { 
-                    year: 'numeric', 
-                    month: 'short'
-                  })}
-                </p>
               </a>
+              <p class="text-sm text-gray-700 mb-1">{mix.data.artist}</p>
+              <p class="text-xs text-gray-500">
+                {mix.data.date.toLocaleDateString('en-US', { 
+                  year: 'numeric', 
+                  month: 'short'
+                })}
+              </p>
             </div>
           ))}
         </div>
@@ -65,32 +65,32 @@ const latestArchives = archives.slice(0, 2);
         <div class="flex flex-wrap gap-6">
           {latestConversations.map((convo) => (
             <div class="group" style="width: 200px;">
-              <a href={`/convo/${convo.slug}`} class="block">
-                <div class="mb-3">
-                  {convo.data.cover ? (
-                    <CoverImage 
-                      collection="conversations"
-                      slug={convo.slug}
-                      cover={convo.data.cover}
-                      alt={`Conversation ${convo.data.number}: ${convo.data.title}`}
-                      class="w-full"
-                    />
-                  ) : (
-                    <div class="aspect-square bg-gray-100 w-full">
-                    </div>
-                  )}
-                </div>
+              <a href={`/convo/${convo.slug}`} class="block mb-3">
+                {convo.data.cover ? (
+                  <CoverImage 
+                    collection="conversations"
+                    slug={convo.slug}
+                    cover={convo.data.cover}
+                    alt={`Conversation ${convo.data.number}: ${convo.data.title}`}
+                    class="w-full"
+                  />
+                ) : (
+                  <div class="aspect-square bg-gray-100 w-full">
+                  </div>
+                )}
+              </a>
+              <a href={`/convo/${convo.slug}`}>
                 <h3 class="text-lg mb-1 group-hover:text-gray-700">
                   {convo.data.number.toString().padStart(3, '0')}: {convo.data.title}
                 </h3>
-                <p class="text-sm text-gray-700 mb-1">{convo.data.participants.join(', ')}</p>
-                <p class="text-xs text-gray-500">
-                  {convo.data.date.toLocaleDateString('en-US', { 
-                    year: 'numeric', 
-                    month: 'short'
-                  })}
-                </p>
               </a>
+              <p class="text-sm text-gray-700 mb-1">{convo.data.participants.join(', ')}</p>
+              <p class="text-xs text-gray-500">
+                {convo.data.date.toLocaleDateString('en-US', { 
+                  year: 'numeric', 
+                  month: 'short'
+                })}
+              </p>
             </div>
           ))}
         </div>
@@ -104,29 +104,29 @@ const latestArchives = archives.slice(0, 2);
         <div class="flex flex-wrap gap-6">
           {latestArchives.map((item) => (
             <div class="group" style="width: 200px;">
-              <a href={`/archive/${item.slug}`} class="block">
-                <div class="mb-3">
-                  {item.data.cover ? (
-                    <CoverImage 
-                      collection="archive"
-                      slug={item.slug}
-                      cover={item.data.cover}
-                      alt={item.data.title}
-                      class="w-full"
-                    />
-                  ) : (
-                    <div class="aspect-square bg-gray-100 w-full">
-                    </div>
-                  )}
-                </div>
+              <a href={`/archive/${item.slug}`} class="block mb-3">
+                {item.data.cover ? (
+                  <CoverImage 
+                    collection="archive"
+                    slug={item.slug}
+                    cover={item.data.cover}
+                    alt={item.data.title}
+                    class="w-full"
+                  />
+                ) : (
+                  <div class="aspect-square bg-gray-100 w-full">
+                  </div>
+                )}
+              </a>
+              <a href={`/archive/${item.slug}`}>
                 <h3 class="text-lg mb-1 group-hover:text-gray-700">
                   {item.data.title}
                 </h3>
-                <p class="text-sm text-gray-700 mb-1">{item.data.type}</p>
-                <p class="text-xs text-gray-500 mb-2">
-                  {item.data.description}
-                </p>
               </a>
+              <p class="text-sm text-gray-700 mb-1">{item.data.type}</p>
+              <p class="text-xs text-gray-500 mb-2">
+                {item.data.description}
+              </p>
             </div>
           ))}
         </div>
@@ -136,9 +136,4 @@ const latestArchives = archives.slice(0, 2);
       </section>
     </div>
 
-    <nav class="mt-12 pt-4 border-t border-gray-200">
-      <p class="text-xs text-gray-500">
-        <a href="/tags" class="hover:text-black">Browse by tags →</a>
-      </p>
-    </nav>
 </Layout>
