@@ -8,8 +8,7 @@ const conversations = await getCollection('conversations');
 conversations.sort((a, b) => b.data.number - a.data.number);
 ---
 
-<Layout title="Conversations - Places" description="Interviews and conversations with DJs, artists, and community members">
-  <div class="p-4 max-w-6xl mx-auto">
+<Layout title="Conversations - Places" description="Interviews and conversations with DJs, artists, and community members" variant="wide">
     <h1 class="text-2xl mb-8">Convo</h1>
     
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
@@ -26,15 +25,14 @@ conversations.sort((a, b) => b.data.number - a.data.number);
                   class="w-full"
                 />
               ) : (
-                <div class="aspect-square bg-gray-200 flex items-center justify-center w-full">
-                  <span class="text-gray-400 text-sm">No cover</span>
+                <div class="aspect-square bg-gray-100 w-full">
                 </div>
               )}
             </div>
-            <h2 class="text-lg mb-1 group-hover:text-gray-600">
+            <h2 class="text-lg mb-1 group-hover:text-gray-700">
               {convo.data.number.toString().padStart(3, '0')}: {convo.data.title}
             </h2>
-            <p class="text-sm text-gray-600 mb-1">{convo.data.participants.join(', ')}</p>
+            <p class="text-sm text-gray-700 mb-1">{convo.data.participants.join(', ')}</p>
             <p class="text-xs text-gray-500">
               {convo.data.date.toLocaleDateString('en-US', { 
                 year: 'numeric', 
@@ -59,5 +57,4 @@ conversations.sort((a, b) => b.data.number - a.data.number);
         </div>
       ))}
     </div>
-  </div>
 </Layout>

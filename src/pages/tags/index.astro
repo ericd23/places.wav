@@ -29,11 +29,10 @@ const totalTags = sortedTags.length;
 const totalTaggedItems = Array.from(tagCounts.values()).reduce((sum, count) => sum + count, 0);
 ---
 
-<Layout title="Tags - Places">
-  <div class="p-4 max-w-2xl mx-auto">
+<Layout title="Tags - Places" variant="wide">
     <header class="mb-8">
       <h1 class="text-2xl mb-2">Tags</h1>
-      <p class="text-sm text-gray-600">
+      <p class="text-sm text-gray-700">
         {totalTags} tag{totalTags !== 1 ? 's' : ''} across {totalTaggedItems} tagged item{totalTaggedItems !== 1 ? 's' : ''}
       </p>
     </header>
@@ -44,7 +43,7 @@ const totalTaggedItems = Array.from(tagCounts.values()).reduce((sum, count) => s
           <div class="border-b border-gray-200 pb-4">
             <div class="flex justify-between items-center">
               <h2 class="text-lg">
-                <a href={`/tags/${tag}`} class="hover:text-gray-600">
+                <a href={`/tags/${tag}`} class="hover:text-gray-700">
                   #{tag}
                 </a>
               </h2>
@@ -61,10 +60,9 @@ const totalTaggedItems = Array.from(tagCounts.values()).reduce((sum, count) => s
 
     <nav class="mt-12 pt-4 border-t border-gray-200">
       <div class="flex space-x-4 text-sm">
-        <a href="/mixes" class="text-gray-600 hover:text-black">All mixes</a>
-        <a href="/convo" class="text-gray-600 hover:text-black">All conversations</a>
-        <a href="/archive" class="text-gray-600 hover:text-black">All archive</a>
+        <a href="/mixes" class="text-gray-700 hover:text-black">All mixes</a>
+        <a href="/convo" class="text-gray-700 hover:text-black">All conversations</a>
+        <a href="/archive" class="text-gray-700 hover:text-black">All archive</a>
       </div>
     </nav>
-  </div>
 </Layout>

@@ -8,8 +8,7 @@ const mixes = await getCollection('mixes');
 mixes.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 ---
 
-<Layout title="Mixes">
-  <div class="p-4 max-w-6xl mx-auto">
+<Layout title="Mixes" variant="wide">
     <h1 class="text-2xl mb-8">Mixes</h1>
     
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
@@ -25,10 +24,10 @@ mixes.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
                 class="w-full"
               />
             </div>
-            <h2 class="text-lg mb-1 group-hover:text-gray-600">
+            <h2 class="text-lg mb-1 group-hover:text-gray-700">
               {mix.data.title}
             </h2>
-            <p class="text-sm text-gray-600 mb-1">{mix.data.artist}</p>
+            <p class="text-sm text-gray-700 mb-1">{mix.data.artist}</p>
             <p class="text-xs text-gray-500">
               {mix.data.date.toLocaleDateString('en-US', { 
                 year: 'numeric', 
@@ -57,5 +56,4 @@ mixes.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
     {mixes.length === 0 && (
       <p class="text-gray-500 text-sm">No mixes available.</p>
     )}
-  </div>
 </Layout>

@@ -16,19 +16,12 @@ const { convo } = Astro.props;
 const { Content } = await convo.render();
 ---
 
-<Layout title={`Convo ${convo.data.number.toString().padStart(3, '0')}: ${convo.data.title} - Places`}>
-  <div class="p-4 max-w-2xl mx-auto">
-    <nav class="mb-8">
-      <a href="/convo" class="text-gray-600 hover:text-black text-sm">
-        ← Back
-      </a>
-    </nav>
-
+<Layout title={`Convo ${convo.data.number.toString().padStart(3, '0')}: ${convo.data.title} - Places`} variant="wide">
     <header class="mb-8">
       <h1 class="text-2xl mb-2">
         Convo {convo.data.number.toString().padStart(3, '0')}: {convo.data.title}
       </h1>
-      <div class="text-sm text-gray-600 mb-4">
+      <div class="text-sm text-gray-700 mb-4">
         {convo.data.participants.join(', ')}
       </div>
       <div class="flex justify-between items-center mb-4">
@@ -58,14 +51,8 @@ const { Content } = await convo.render();
       <EmbedPlayer url={convo.data.embed_url} />
     )}
 
-    <article class="markdown-body text-sm leading-relaxed text-gray-700">
+    <article class="markdown-body text-sm leading-relaxed text-black">
       <Content />
     </article>
 
-    <nav class="mt-8 pt-4 border-t border-gray-200">
-      <a href="/convo" class="text-gray-600 hover:text-black text-sm">
-        All conversations
-      </a>
-    </nav>
-  </div>
 </Layout>

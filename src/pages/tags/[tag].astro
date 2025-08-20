@@ -32,17 +32,10 @@ const { tag, mixes, conversations, archives } = Astro.props;
 const totalCount = mixes.length + conversations.length + archives.length;
 ---
 
-<Layout title={`Tag: ${tag} - Places`}>
-  <div class="p-4 max-w-6xl mx-auto">
-    <nav class="mb-8">
-      <a href="/tags" class="text-gray-600 hover:text-black text-sm">
-        ← All tags
-      </a>
-    </nav>
-
+<Layout title={`Tag: ${tag} - Places`} variant="wide">
     <header class="mb-8">
       <h1 class="text-2xl mb-2">#{tag}</h1>
-      <p class="text-sm text-gray-600">
+      <p class="text-sm text-gray-700">
         {totalCount} item{totalCount !== 1 ? 's' : ''} tagged with "{tag}"
       </p>
     </header>
@@ -64,10 +57,10 @@ const totalCount = mixes.length + conversations.length + archives.length;
                       class="w-full"
                     />
                   </div>
-                  <h3 class="text-lg mb-1 group-hover:text-gray-600">
+                  <h3 class="text-lg mb-1 group-hover:text-gray-700">
                     {mix.data.title}
                   </h3>
-                  <p class="text-sm text-gray-600 mb-1">{mix.data.artist}</p>
+                  <p class="text-sm text-gray-700 mb-1">{mix.data.artist}</p>
                   <p class="text-xs text-gray-500">
                     {mix.data.date.toLocaleDateString('en-US', { 
                       year: 'numeric', 
@@ -112,15 +105,14 @@ const totalCount = mixes.length + conversations.length + archives.length;
                         class="w-full"
                       />
                     ) : (
-                      <div class="aspect-square bg-gray-200 flex items-center justify-center w-full">
-                        <span class="text-gray-400 text-sm">No cover</span>
+                      <div class="aspect-square bg-gray-100 w-full">
                       </div>
                     )}
                   </div>
-                  <h3 class="text-lg mb-1 group-hover:text-gray-600">
+                  <h3 class="text-lg mb-1 group-hover:text-gray-700">
                     {convo.data.number.toString().padStart(3, '0')}: {convo.data.title}
                   </h3>
-                  <p class="text-sm text-gray-600 mb-1">{convo.data.participants.join(', ')}</p>
+                  <p class="text-sm text-gray-700 mb-1">{convo.data.participants.join(', ')}</p>
                   <p class="text-xs text-gray-500">
                     {convo.data.date.toLocaleDateString('en-US', { 
                       year: 'numeric', 
@@ -165,15 +157,14 @@ const totalCount = mixes.length + conversations.length + archives.length;
                         class="w-full"
                       />
                     ) : (
-                      <div class="aspect-square bg-gray-200 flex items-center justify-center w-full">
-                        <span class="text-gray-400 text-sm">No cover</span>
+                      <div class="aspect-square bg-gray-100 w-full">
                       </div>
                     )}
                   </div>
-                  <h3 class="text-lg mb-1 group-hover:text-gray-600">
+                  <h3 class="text-lg mb-1 group-hover:text-gray-700">
                     {item.data.title}
                   </h3>
-                  <p class="text-sm text-gray-600 mb-1">{item.data.type}</p>
+                  <p class="text-sm text-gray-700 mb-1">{item.data.type}</p>
                   <p class="text-xs text-gray-500 mb-2">
                     {item.data.date.toLocaleDateString('en-US', { 
                       year: 'numeric', 
@@ -208,5 +199,4 @@ const totalCount = mixes.length + conversations.length + archives.length;
     {totalCount === 0 && (
       <p class="text-gray-500 text-sm">No content found with this tag.</p>
     )}
-  </div>
 </Layout>

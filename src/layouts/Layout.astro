@@ -4,9 +4,16 @@ import "../styles/global.css";
 export interface Props {
   title: string;
   description?: string;
+  variant?: 'wide' | 'narrow';
 }
 
-const { title, description = "Hamilton DJ collective focusing on democratizing DJ practices and music education." } = Astro.props;
+const { 
+  title, 
+  description = "Hamilton DJ collective focusing on democratizing DJ practices and music education.",
+  variant = 'narrow'
+} = Astro.props;
+
+const containerClass = variant === 'wide' ? 'max-w-6xl' : 'max-w-2xl';
 ---
 
 <!DOCTYPE html>
@@ -20,27 +27,32 @@ const { title, description = "Hamilton DJ collective focusing on democratizing D
     <title>{title}</title>
   </head>
   <body class="h-full bg-white text-black font-mono">
-    <div class="min-h-full max-w-4xl mx-auto">
-      <header class="fixed top-0 left-0 right-0 z-10 bg-white border-b border-gray-200">
-        <nav class="flex items-center justify-between p-4 text-sm max-w-4xl mx-auto">
-          <a href="/" class="text-black hover:text-gray-600">PLACES</a>
+    <div class="min-h-full flex flex-col">
+      <header class="fixed top-0 left-0 right-0 z-10 border-b border-gray-200" style="background-color: #2627ca;">
+        <nav class="flex items-center justify-between p-4 text-sm">
+          <a href="/" class="hover:opacity-80">
+            <img src="/logo.png" alt="Places" class="h-8" />
+          </a>
           <div class="flex space-x-6">
-            <a href="/mixes" class="text-black hover:text-gray-600">Mixes</a>
-            <a href="/convo" class="text-black hover:text-gray-600">Convo</a>
-            <a href="/archive" class="text-black hover:text-gray-600">Archive</a>
-            <a href="/about" class="text-black hover:text-gray-600">About</a>
+            <a href="/mixes" class="text-white hover:text-gray-300">Mixes</a>
+            <a href="/convo" class="text-white hover:text-gray-300">Convo</a>
+            <a href="/archive" class="text-white hover:text-gray-300">Archive</a>
+            <a href="/about" class="text-white hover:text-gray-300">About</a>
           </div>
         </nav>
       </header>
       
-      <main class="pt-16">
-        <slot />
+      <main class="pt-16 flex-1">
+        <div class={`p-4 ${containerClass} mx-auto`}>
+          <slot />
+        </div>
       </main>
       
-      <footer class="p-4 text-xs text-gray-500 border-t border-gray-200">
-        <div class="flex justify-between items-center">
-          <span>Hamilton DJ collective</span>
-          <div class="flex space-x-4">
+      <footer class="border-t border-gray-200 mt-auto">
+        <div class="p-4 text-xs text-gray-600 text-right">
+          <div class="mb-2">Hamilton DJ collective</div>
+          <div class="flex justify-end space-x-4">
+            <a href="mailto:placeswav@gmail.com" class="hover:text-black">Email</a>
             <a href="https://instagram.com/places.wav" target="_blank" rel="noopener noreferrer" class="hover:text-black">Instagram</a>
             <a href="https://discord.gg/Z3FX6376pS" target="_blank" rel="noopener noreferrer" class="hover:text-black">Discord</a>
           </div>

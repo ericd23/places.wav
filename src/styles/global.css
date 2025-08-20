@@ -37,15 +37,15 @@
 }
 
 .markdown-body blockquote {
-  border-left: 2px solid #d1d5db;
+  border-left: 2px solid #d1d5db; /* gray-300 */
   padding-left: 1rem;
   font-style: italic;
-  color: #6b7280;
+  color: #6b7280; /* gray-500 */
   margin-bottom: 0.75rem;
 }
 
 .markdown-body code {
-  background-color: #f3f4f6;
+  background-color: #f3f4f6; /* gray-100 */
   padding: 0.125rem 0.25rem;
   border-radius: 0.25rem;
   font-size: 0.75rem;
@@ -53,7 +53,7 @@
 }
 
 .markdown-body pre {
-  background-color: #f3f4f6;
+  background-color: #f3f4f6; /* gray-100 */
   padding: 0.75rem;
   border-radius: 0.25rem;
   margin-bottom: 0.75rem;
@@ -81,4 +81,9 @@
 
 .markdown-body em {
   font-style: italic;
+}
+
+/* Global link hover effects */
+a:hover {
+  text-decoration: underline;
 }

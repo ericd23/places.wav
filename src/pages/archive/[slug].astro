@@ -16,19 +16,12 @@ const { item } = Astro.props;
 const { Content } = await item.render();
 ---
 
-<Layout title={`${item.data.title} - Archive - Places`}>
-  <div class="p-4 max-w-2xl mx-auto">
-    <nav class="mb-8">
-      <a href="/archive" class="text-gray-600 hover:text-black text-sm">
-        ← Back
-      </a>
-    </nav>
-
+<Layout title={`${item.data.title} - Archive - Places`} variant="wide">
     <header class="mb-8">
       <h1 class="text-2xl mb-2">
         {item.data.title}
       </h1>
-      <div class="text-sm text-gray-600 mb-4">
+      <div class="text-sm text-gray-700 mb-4">
         {item.data.type}
       </div>
       <div class="text-xs text-gray-500 mb-6">
@@ -60,14 +53,8 @@ const { Content } = await item.render();
       <EmbedPlayer url={item.data.embed_url} />
     )}
 
-    <article class="markdown-body text-sm leading-relaxed text-gray-700">
+    <article class="markdown-body text-sm leading-relaxed text-black">
       <Content />
     </article>
 
-    <nav class="mt-8 pt-4 border-t border-gray-200">
-      <a href="/archive" class="text-gray-600 hover:text-black text-sm">
-        All archive
-      </a>
-    </nav>
-  </div>
 </Layout>
