@@ -1,6 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import CoverImage from '../../components/CoverImage.astro';
+import CollectionGrid from '../../components/CollectionGrid.astro';
 import { getCollection } from 'astro:content';
 
 export async function getStaticPaths() {
@@ -43,155 +43,19 @@ const totalCount = mixes.length + conversations.length + archives.length;
     <div class="space-y-12">
       {mixes.length > 0 && (
         <section>
-          <h2 class="text-lg mb-4">Mixes ({mixes.length})</h2>
-          <div class="flex flex-wrap gap-6">
-            {mixes.map((mix) => (
-              <div class="group" style="width: 200px;">
-                <a href={`/mixes/${mix.slug}`} class="block">
-                  <div class="mb-3">
-                    <CoverImage 
-                      collection="mixes"
-                      slug={mix.slug}
-                      cover={mix.data.cover}
-                      alt={`${mix.data.title} by ${mix.data.artist}`}
-                      class="w-full"
-                    />
-                  </div>
-                  <h3 class="text-lg mb-1 group-hover:text-gray-700">
-                    {mix.data.title}
-                  </h3>
-                  <p class="text-sm text-gray-700 mb-1">{mix.data.artist}</p>
-                  <p class="text-xs text-gray-500">
-                    {mix.data.date.toLocaleDateString('en-US', { 
-                      year: 'numeric', 
-                      month: 'short'
-                    })}
-                  </p>
-                  
-                  {mix.data.tags && mix.data.tags.length > 0 && (
-                    <div class="flex flex-wrap gap-1 mt-2">
-                      {mix.data.tags.map((mixTag) => (
-                        <a 
-                          href={`/tags/${mixTag}`}
-                          class={`text-xs ${mixTag === tag ? 'text-black font-medium' : 'text-gray-500 hover:text-black'}`}
-                          onclick="event.stopPropagation()"
-                        >
-                          #{mixTag}
-                        </a>
-                      ))}
-                    </div>
-                  )}
-                </a>
-              </div>
-            ))}
-          </div>
+          <CollectionGrid items={mixes} collection="mixes" showCount={true} currentTag={tag} />
         </section>
       )}
 
       {conversations.length > 0 && (
         <section>
-          <h2 class="text-lg mb-4">Conversations ({conversations.length})</h2>
-          <div class="flex flex-wrap gap-6">
-            {conversations.map((convo) => (
-              <div class="group" style="width: 200px;">
-                <a href={`/convo/${convo.slug}`} class="block">
-                  <div class="mb-3">
-                    {convo.data.cover ? (
-                      <CoverImage 
-                        collection="conversations"
-                        slug={convo.slug}
-                        cover={convo.data.cover}
-                        alt={`Conversation ${convo.data.number}: ${convo.data.title}`}
-                        class="w-full"
-                      />
-                    ) : (
-                      <div class="aspect-square bg-gray-100 w-full">
-                      </div>
-                    )}
-                  </div>
-                  <h3 class="text-lg mb-1 group-hover:text-gray-700">
-                    {convo.data.number.toString().padStart(3, '0')}: {convo.data.title}
-                  </h3>
-                  <p class="text-sm text-gray-700 mb-1">{convo.data.participants.join(', ')}</p>
-                  <p class="text-xs text-gray-500">
-                    {convo.data.date.toLocaleDateString('en-US', { 
-                      year: 'numeric', 
-                      month: 'short'
-                    })}
-                  </p>
-                  
-                  {convo.data.tags && convo.data.tags.length > 0 && (
-                    <div class="flex flex-wrap gap-1 mt-2">
-                      {convo.data.tags.map((convoTag) => (
-                        <a 
-                          href={`/tags/${convoTag}`}
-                          class={`text-xs ${convoTag === tag ? 'text-black font-medium' : 'text-gray-500 hover:text-black'}`}
-                          onclick="event.stopPropagation()"
-                        >
-                          #{convoTag}
-                        </a>
-                      ))}
-                    </div>
-                  )}
-                </a>
-              </div>
-            ))}
-          </div>
+          <CollectionGrid items={conversations} collection="conversations" showCount={true} currentTag={tag} />
         </section>
       )}
 
       {archives.length > 0 && (
         <section>
-          <h2 class="text-lg mb-4">Archive ({archives.length})</h2>
-          <div class="flex flex-wrap gap-6">
-            {archives.map((item) => (
-              <div class="group" style="width: 200px;">
-                <a href={`/archive/${item.slug}`} class="block">
-                  <div class="mb-3">
-                    {item.data.cover ? (
-                      <CoverImage 
-                        collection="archive"
-                        slug={item.slug}
-                        cover={item.data.cover}
-                        alt={item.data.title}
-                        class="w-full"
-                      />
-                    ) : (
-                      <div class="aspect-square bg-gray-100 w-full">
-                      </div>
-                    )}
-                  </div>
-                  <h3 class="text-lg mb-1 group-hover:text-gray-700">
-                    {item.data.title}
-                  </h3>
-                  <p class="text-sm text-gray-700 mb-1">{item.data.type}</p>
-                  <p class="text-xs text-gray-500 mb-2">
-                    {item.data.date.toLocaleDateString('en-US', { 
-                      year: 'numeric', 
-                      month: 'short'
-                    })}
-                  </p>
-                  <p class="text-xs text-gray-500 mb-2">
-                    {item.data.description}
-                  </p>
-                  
-                  {item.data.tags && item.data.tags.length > 0 && (
-                    <div class="flex flex-wrap gap-1">
-                      {item.data.tags.map((archiveTag) => (
-                        <a 
-                          href={`/tags/${archiveTag}`}
-                          class={`text-xs ${archiveTag === tag ? 'text-black font-medium' : 'text-gray-500 hover:text-black'}`}
-                          onclick="event.stopPropagation()"
-                        >
-                          #{archiveTag}
-                        </a>
-                      ))}
-                    </div>
-                  )}
-                </a>
-              </div>
-            ))}
-          </div>
+          <CollectionGrid items={archives} collection="archive" showCount={true} currentTag={tag} />
         </section>
       )}
     </div>

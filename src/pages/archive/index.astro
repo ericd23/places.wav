@@ -1,6 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import CoverImage from '../../components/CoverImage.astro';
+import CollectionGrid from '../../components/CollectionGrid.astro';
 import { getCollection } from 'astro:content';
 
 // Get all archive entries, sorted by date (newest first)
@@ -11,53 +11,5 @@ archives.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 <Layout title="Archive - Places" description="Photography, workshops, events, and historical documentation" variant="wide">
     <h1 class="text-2xl mb-8">Archive</h1>
     
-    <div class="flex flex-wrap gap-6">
-      {archives.map((item) => (
-        <div class="group" style="width: 200px;">
-          <a href={`/archive/${item.slug}`} class="block">
-            <div class="mb-3">
-              {item.data.cover ? (
-                <CoverImage 
-                  collection="archive"
-                  slug={item.slug}
-                  cover={item.data.cover}
-                  alt={item.data.title}
-                  class="w-full"
-                />
-              ) : (
-                <div class="aspect-square bg-gray-100 w-full">
-                </div>
-              )}
-            </div>
-            <h2 class="text-lg mb-1 group-hover:text-gray-700">
-              {item.data.title}
-            </h2>
-            <p class="text-sm text-gray-700 mb-1">{item.data.type}</p>
-            <p class="text-xs text-gray-500 mb-2">
-              {item.data.date.toLocaleDateString('en-US', { 
-                year: 'numeric', 
-                month: 'short'
-              })}
-            </p>
-            <p class="text-xs text-gray-500 mb-2">
-              {item.data.description}
-            </p>
-            
-            {item.data.tags && item.data.tags.length > 0 && (
-              <div class="flex flex-wrap gap-1">
-                {item.data.tags.map((tag) => (
-                  <a 
-                    href={`/tags/${tag}`}
-                    class="text-xs text-gray-500 hover:text-black"
-                    onclick="event.stopPropagation()"
-                  >
-                    #{tag}
-                  </a>
-                ))}
-              </div>
-            )}
-          </a>
-        </div>
-      ))}
-    </div>
+    <CollectionGrid items={archives} collection="archive" showCount={true} />
 </Layout>

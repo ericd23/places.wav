@@ -1,6 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import CoverImage from '../components/CoverImage.astro';
+import CollectionGrid from '../components/CollectionGrid.astro';
 import { getCollection } from 'astro:content';
 
 // Get latest content
@@ -28,33 +28,7 @@ const latestArchives = archives.slice(0, 5);
     <div class="space-y-12">
       <section>
         <h2 class="text-lg mb-4">Latest Mixes</h2>
-        <div class="flex flex-wrap gap-6">
-          {latestMixes.map((mix) => (
-            <div class="group" style="width: 200px;">
-              <a href={`/mixes/${mix.slug}`} class="block mb-3">
-                <CoverImage 
-                  collection="mixes"
-                  slug={mix.slug}
-                  cover={mix.data.cover}
-                  alt={`${mix.data.title} by ${mix.data.artist}`}
-                  class="w-full"
-                />
-              </a>
-              <a href={`/mixes/${mix.slug}`}>
-                <h3 class="text-lg mb-1 group-hover:text-gray-700">
-                  {mix.data.title}
-                </h3>
-              </a>
-              <p class="text-sm text-gray-700 mb-1">{mix.data.artist}</p>
-              <p class="text-xs text-gray-500">
-                {mix.data.date.toLocaleDateString('en-US', { 
-                  year: 'numeric', 
-                  month: 'short'
-                })}
-              </p>
-            </div>
-          ))}
-        </div>
+        <CollectionGrid items={latestMixes} collection="mixes" />
         <p class="text-xs text-gray-500 mt-4">
           <a href="/mixes" class="hover:text-black">All mixes →</a>
         </p>
@@ -62,38 +36,7 @@ const latestArchives = archives.slice(0, 5);
 
       <section>
         <h2 class="text-lg mb-4">Latest Conversations</h2>
-        <div class="flex flex-wrap gap-6">
-          {latestConversations.map((convo) => (
-            <div class="group" style="width: 200px;">
-              <a href={`/convo/${convo.slug}`} class="block mb-3">
-                {convo.data.cover ? (
-                  <CoverImage 
-                    collection="conversations"
-                    slug={convo.slug}
-                    cover={convo.data.cover}
-                    alt={`Conversation ${convo.data.number}: ${convo.data.title}`}
-                    class="w-full"
-                  />
-                ) : (
-                  <div class="aspect-square bg-gray-100 w-full">
-                  </div>
-                )}
-              </a>
-              <a href={`/convo/${convo.slug}`}>
-                <h3 class="text-lg mb-1 group-hover:text-gray-700">
-                  {convo.data.number.toString().padStart(3, '0')}: {convo.data.title}
-                </h3>
-              </a>
-              <p class="text-sm text-gray-700 mb-1">{convo.data.participants.join(', ')}</p>
-              <p class="text-xs text-gray-500">
-                {convo.data.date.toLocaleDateString('en-US', { 
-                  year: 'numeric', 
-                  month: 'short'
-                })}
-              </p>
-            </div>
-          ))}
-        </div>
+        <CollectionGrid items={latestConversations} collection="conversations" />
         <p class="text-xs text-gray-500 mt-4">
           <a href="/convo" class="hover:text-black">All conversations →</a>
         </p>
@@ -101,35 +44,7 @@ const latestArchives = archives.slice(0, 5);
 
       <section>
         <h2 class="text-lg mb-4">Recent Archive</h2>
-        <div class="flex flex-wrap gap-6">
-          {latestArchives.map((item) => (
-            <div class="group" style="width: 200px;">
-              <a href={`/archive/${item.slug}`} class="block mb-3">
-                {item.data.cover ? (
-                  <CoverImage 
-                    collection="archive"
-                    slug={item.slug}
-                    cover={item.data.cover}
-                    alt={item.data.title}
-                    class="w-full"
-                  />
-                ) : (
-                  <div class="aspect-square bg-gray-100 w-full">
-                  </div>
-                )}
-              </a>
-              <a href={`/archive/${item.slug}`}>
-                <h3 class="text-lg mb-1 group-hover:text-gray-700">
-                  {item.data.title}
-                </h3>
-              </a>
-              <p class="text-sm text-gray-700 mb-1">{item.data.type}</p>
-              <p class="text-xs text-gray-500 mb-2">
-                {item.data.description}
-              </p>
-            </div>
-          ))}
-        </div>
+        <CollectionGrid items={latestArchives} collection="archive" />
         <p class="text-xs text-gray-500 mt-4">
           <a href="/archive" class="hover:text-black">All archive →</a>
         </p>

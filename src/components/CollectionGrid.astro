@@ -1,0 +1,92 @@
+---
+import CoverImage from './CoverImage.astro';
+import TagList from './TagList.astro';
+import { formatDate } from '../utils/dateFormatter';
+
+export interface Props {
+  items: any[];
+  collection: 'mixes' | 'conversations' | 'archive';
+  showCount?: boolean;
+  currentTag?: string;
+}
+
+const { items, collection, showCount = false, currentTag } = Astro.props;
+
+function getItemUrl(item: any, collection: string) {
+  if (collection === 'conversations') return `/convo/${item.slug}`;
+  return `/${collection}/${item.slug}`;
+}
+
+function getItemTitle(item: any, collection: string) {
+  if (collection === 'conversations') {
+    return `${item.data.number.toString().padStart(3, '0')}: ${item.data.title}`;
+  }
+  return item.data.title;
+}
+
+function getItemSubtitle(item: any, collection: string) {
+  if (collection === 'mixes') return item.data.artist;
+  if (collection === 'conversations') return item.data.participants.join(', ');
+  if (collection === 'archive') return item.data.type;
+  return '';
+}
+
+function getItemDescription(item: any, collection: string) {
+  if (collection === 'archive') return item.data.description;
+  return null;
+}
+
+function getCoverAlt(item: any, collection: string) {
+  if (collection === 'mixes') return `${item.data.title} by ${item.data.artist}`;
+  if (collection === 'conversations') return `Conversation ${item.data.number}: ${item.data.title}`;
+  return item.data.title;
+}
+---
+
+{showCount && items.length > 0 && (
+  <h2 class="text-lg mb-4 capitalize">{collection} ({items.length})</h2>
+)}
+
+<div class="flex flex-wrap gap-6">
+  {items.map((item) => (
+    <div class="group" style="width: 200px;">
+      <div class="mb-3">
+        <a href={getItemUrl(item, collection)} class="block cursor-pointer">
+          {item.data.cover ? (
+            <CoverImage 
+              collection={collection}
+              slug={item.slug}
+              cover={item.data.cover}
+              alt={getCoverAlt(item, collection)}
+              class="w-full"
+            />
+          ) : (
+            <div class="aspect-square bg-gray-100 w-full">
+            </div>
+          )}
+        </a>
+      </div>
+      <a href={getItemUrl(item, collection)} class="cursor-pointer">
+        <h3 class="text-lg mb-1 hover:underline">
+          {getItemTitle(item, collection)}
+        </h3>
+      </a>
+      {getItemSubtitle(item, collection) && (
+        <p class="text-sm text-gray-700 mb-1">{getItemSubtitle(item, collection)}</p>
+      )}
+      <p class="text-xs text-gray-500">
+        {formatDate(item.data.date)}
+      </p>
+      
+      {getItemDescription(item, collection) && (
+        <p class="text-xs text-gray-500 mb-2">
+          {getItemDescription(item, collection)}
+        </p>
+      )}
+    </div>
+  ))}
+</div>
+
+{items.length === 0 && showCount && (
+  <p class="text-gray-500 text-sm">No {collection} available.</p>
+)}

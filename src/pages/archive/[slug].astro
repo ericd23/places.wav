@@ -1,7 +1,8 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import EmbedPlayer from '../../components/EmbedPlayer.astro';
-
+import TagList from '../../components/TagList.astro';
+import { formatDate } from '../../utils/dateFormatter';
 import { getCollection } from 'astro:content';
 
 export async function getStaticPaths() {
@@ -25,28 +26,13 @@ const { Content } = await item.render();
         {item.data.type}
       </div>
       <div class="text-xs text-gray-500 mb-6">
-        {item.data.date.toLocaleDateString('en-US', { 
-          year: 'numeric', 
-          month: 'long',
-          day: 'numeric'
-        })}
+        {formatDate(item.data.date, 'long')}
       </div>
       <p class="text-xs text-gray-500 mb-4">
         {item.data.description}
       </p>
       
-      {item.data.tags && item.data.tags.length > 0 && (
-        <div class="flex flex-wrap gap-2 mb-8">
-          {item.data.tags.map((tag) => (
-            <a 
-              href={`/tags/${tag}`}
-              class="text-xs text-gray-500 hover:text-black"
-            >
-              #{tag}
-            </a>
-          ))}
-        </div>
-      )}
+      <TagList tags={item.data.tags} class="flex flex-wrap gap-2 mb-8" />
     </header>
 
     {item.data.embed_url && (

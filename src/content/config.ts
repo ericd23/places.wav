@@ -10,7 +10,6 @@ const mixesCollection = defineCollection({
     external_link: z.string().optional(),
     embed_url: z.string().optional(),
     tags: z.array(z.string()).default([]),
-    featured: z.boolean().default(false),
   }),
 });
 
@@ -24,7 +23,6 @@ const conversationsCollection = defineCollection({
     cover: z.string().optional(),
     embed_url: z.string().optional(),
     tags: z.array(z.string()).default([]),
-    featured: z.boolean().default(false),
   }),
 });
 
@@ -35,11 +33,10 @@ const archiveCollection = defineCollection({
     type: z.enum(['photography', 'workshop', 'event']),
     date: z.date(),
     cover: z.string().optional(),
+    embed_url: z.string().optional(),
     images: z.array(z.string()).default([]),
     description: z.string(),
-    embed_url: z.string().optional(),
     tags: z.array(z.string()).default([]),
-    featured: z.boolean().default(false),
   }),
 });
 

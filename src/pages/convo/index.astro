@@ -1,6 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import CoverImage from '../../components/CoverImage.astro';
+import CollectionGrid from '../../components/CollectionGrid.astro';
 import { getCollection } from 'astro:content';
 
 // Get all conversations, sorted by number (newest first)
@@ -11,50 +11,5 @@ conversations.sort((a, b) => b.data.number - a.data.number);
 <Layout title="Conversations - Places" description="Interviews and conversations with DJs, artists, and community members" variant="wide">
     <h1 class="text-2xl mb-8">Convo</h1>
     
-    <div class="flex flex-wrap gap-6">
-      {conversations.map((convo) => (
-        <div class="group" style="width: 200px;">
-          <a href={`/convo/${convo.slug}`} class="block">
-            <div class="mb-3">
-              {convo.data.cover ? (
-                <CoverImage 
-                  collection="conversations"
-                  slug={convo.slug}
-                  cover={convo.data.cover}
-                  alt={`Conversation ${convo.data.number}: ${convo.data.title}`}
-                  class="w-full"
-                />
-              ) : (
-                <div class="aspect-square bg-gray-100 w-full">
-                </div>
-              )}
-            </div>
-            <h2 class="text-lg mb-1 group-hover:text-gray-700">
-              {convo.data.number.toString().padStart(3, '0')}: {convo.data.title}
-            </h2>
-            <p class="text-sm text-gray-700 mb-1">{convo.data.participants.join(', ')}</p>
-            <p class="text-xs text-gray-500">
-              {convo.data.date.toLocaleDateString('en-US', { 
-                year: 'numeric', 
-                month: 'short'
-              })}
-            </p>
-            
-            {convo.data.tags && convo.data.tags.length > 0 && (
-              <div class="flex flex-wrap gap-1 mt-2">
-                {convo.data.tags.map((tag) => (
-                  <a 
-                    href={`/tags/${tag}`}
-                    class="text-xs text-gray-500 hover:text-black"
-                    onclick="event.stopPropagation()"
-                  >
-                    #{tag}
-                  </a>
-                ))}
-              </div>
-            )}
-          </a>
-        </div>
-      ))}
-    </div>
+    <CollectionGrid items={conversations} collection="conversations" showCount={true} />
 </Layout>
