@@ -19,18 +19,29 @@ const cleanCover = cover.startsWith('./') ? cover.slice(2) : cover;
 const coverPath = `/src/content/${collection}/${slug}/${cleanCover}`;
 const imageModule = images[coverPath];
 
+let resolvedImage = null;
+if (imageModule) {
+  try {
+    const imported = await imageModule();
+    resolvedImage = (imported as any)?.default || imported;
+  } catch (e) {
+    console.warn(`Failed to load image: ${coverPath}`);
+  }
+}
+
 ---
 
-{imageModule ? (
+{resolvedImage ? (
   <Image 
-    src={imageModule()} 
+    src={resolvedImage} 
     alt={alt}
-    width={400}
-    height={400}
+    width={200}
+    height={200}
     loading="lazy"
-    class={`aspect-square object-cover ${className}`}
+    class={`object-cover ${className}`}
+    style="width: 200px; height: 200px;"
   />
 ) : (
-  <div class={`aspect-square bg-gray-100 ${className}`}>
+  <div class={`bg-gray-100 ${className}`} style="width: 200px; height: 200px;">
   </div>
 )}

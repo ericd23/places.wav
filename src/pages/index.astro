@@ -28,9 +28,9 @@ const latestArchives = archives.slice(0, 2);
     <div class="space-y-12">
       <section>
         <h2 class="text-lg mb-4">Latest Mixes</h2>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        <div class="flex flex-wrap gap-6">
           {latestMixes.map((mix) => (
-            <div class="group">
+            <div class="group" style="width: 200px;">
               <a href={`/mixes/${mix.slug}`} class="block">
                 <div class="mb-3">
                   <CoverImage 
@@ -62,9 +62,9 @@ const latestArchives = archives.slice(0, 2);
 
       <section>
         <h2 class="text-lg mb-4">Latest Conversations</h2>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        <div class="flex flex-wrap gap-6">
           {latestConversations.map((convo) => (
-            <div class="group">
+            <div class="group" style="width: 200px;">
               <a href={`/convo/${convo.slug}`} class="block">
                 <div class="mb-3">
                   {convo.data.cover ? (
@@ -101,9 +101,9 @@ const latestArchives = archives.slice(0, 2);
 
       <section>
         <h2 class="text-lg mb-4">Recent Archive</h2>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        <div class="flex flex-wrap gap-6">
           {latestArchives.map((item) => (
-            <div class="group">
+            <div class="group" style="width: 200px;">
               <a href={`/archive/${item.slug}`} class="block">
                 <div class="mb-3">
                   {item.data.cover ? (

@@ -11,9 +11,9 @@ archives.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 <Layout title="Archive - Places" description="Photography, workshops, events, and historical documentation" variant="wide">
     <h1 class="text-2xl mb-8">Archive</h1>
     
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+    <div class="flex flex-wrap gap-6">
       {archives.map((item) => (
-        <div class="group">
+        <div class="group" style="width: 200px;">
           <a href={`/archive/${item.slug}`} class="block">
             <div class="mb-3">
               {item.data.cover ? (

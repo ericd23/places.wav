@@ -44,9 +44,9 @@ const totalCount = mixes.length + conversations.length + archives.length;
       {mixes.length > 0 && (
         <section>
           <h2 class="text-lg mb-4">Mixes ({mixes.length})</h2>
-          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          <div class="flex flex-wrap gap-6">
             {mixes.map((mix) => (
-              <div class="group">
+              <div class="group" style="width: 200px;">
                 <a href={`/mixes/${mix.slug}`} class="block">
                   <div class="mb-3">
                     <CoverImage 
@@ -91,9 +91,9 @@ const totalCount = mixes.length + conversations.length + archives.length;
       {conversations.length > 0 && (
         <section>
           <h2 class="text-lg mb-4">Conversations ({conversations.length})</h2>
-          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          <div class="flex flex-wrap gap-6">
             {conversations.map((convo) => (
-              <div class="group">
+              <div class="group" style="width: 200px;">
                 <a href={`/convo/${convo.slug}`} class="block">
                   <div class="mb-3">
                     {convo.data.cover ? (
@@ -143,9 +143,9 @@ const totalCount = mixes.length + conversations.length + archives.length;
       {archives.length > 0 && (
         <section>
           <h2 class="text-lg mb-4">Archive ({archives.length})</h2>
-          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          <div class="flex flex-wrap gap-6">
             {archives.map((item) => (
-              <div class="group">
+              <div class="group" style="width: 200px;">
                 <a href={`/archive/${item.slug}`} class="block">
                   <div class="mb-3">
                     {item.data.cover ? (
