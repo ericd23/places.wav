@@ -2,7 +2,7 @@
 title: "azizA x Places Wav"
 artist: "azizA"
 date: 2024-05-10
-image: ""
+cover: "./cover.jpg"
 external_link: "https://soundcloud.com/example"
 embed_url: "https://soundcloud.com/dunawayy/aziza-072425"
 tags: ["house", "disco"]

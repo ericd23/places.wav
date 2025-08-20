@@ -2,7 +2,7 @@
 title: "Blockletter x Places Wav - July"
 artist: "Blockletter"
 date: 2024-07-20
-image: ""
+cover: "./cover.jpg"
 external_link: "https://mixcloud.com/example"
 tags: ["techno", "experimental"]
 featured: false

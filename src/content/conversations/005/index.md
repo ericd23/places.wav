@@ -3,6 +3,7 @@ number: 5
 title: "Peachface Lovedeep + Godemperor + blankchasm"
 participants: ["Peachface Lovedeep", "Godemperor", "blankchasm"]
 date: 2024-04-15
+cover: "./cover.jpg"
 tags: ["collaboration", "community", "music"]
 featured: false
 ---

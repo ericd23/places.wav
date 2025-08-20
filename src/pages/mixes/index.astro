@@ -1,5 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import CoverImage from '../../components/CoverImage.astro';
 import { getCollection } from 'astro:content';
 
 // Get all mixes, sorted by date (newest first)
@@ -8,58 +9,47 @@ mixes.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 ---
 
 <Layout title="Mixes">
-  <div class="p-4 max-w-2xl mx-auto">
+  <div class="p-4 max-w-6xl mx-auto">
     <h1 class="text-2xl mb-8">Mixes</h1>
     
-    <div class="space-y-4">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
       {mixes.map((mix) => (
-        <div class="border-b border-gray-200 pb-4">
-          <div class="flex justify-between items-start mb-2">
-            <div>
-              <h2 class="text-lg mb-1">
-                <a href={`/mixes/${mix.slug}`} class="hover:text-gray-600">
-                  {mix.data.title}
-                </a>
-              </h2>
-              <p class="text-sm text-gray-600">{mix.data.artist}</p>
+        <div class="group">
+          <a href={`/mixes/${mix.slug}`} class="block">
+            <div class="mb-3">
+              <CoverImage 
+                collection="mixes"
+                slug={mix.slug}
+                cover={mix.data.cover}
+                alt={`${mix.data.title} by ${mix.data.artist}`}
+                class="w-full"
+              />
             </div>
-            <span class="text-xs text-gray-500">
+            <h2 class="text-lg mb-1 group-hover:text-gray-600">
+              {mix.data.title}
+            </h2>
+            <p class="text-sm text-gray-600 mb-1">{mix.data.artist}</p>
+            <p class="text-xs text-gray-500">
               {mix.data.date.toLocaleDateString('en-US', { 
                 year: 'numeric', 
                 month: 'short'
               })}
-            </span>
-          </div>
-          
-          {mix.data.tags && mix.data.tags.length > 0 && (
-            <div class="flex flex-wrap gap-2 mb-3">
-              {mix.data.tags.map((tag) => (
-                <a 
-                  href={`/tags/${tag}`}
-                  class="text-xs text-gray-500 hover:text-black"
-                >
-                  #{tag}
-                </a>
-              ))}
-            </div>
-          )}
-          
-          <div class="flex space-x-4 text-xs">
-            <a 
-              href={mix.data.external_link || '#'} 
-              target="_blank" 
-              rel="noopener noreferrer"
-              class="text-gray-600 hover:text-black"
-            >
-              Listen
-            </a>
-            <a 
-              href={`/mixes/${mix.slug}`}
-              class="text-gray-600 hover:text-black"
-            >
-              Details
-            </a>
-          </div>
+            </p>
+            
+            {mix.data.tags && mix.data.tags.length > 0 && (
+              <div class="flex flex-wrap gap-1 mt-2">
+                {mix.data.tags.map((tag) => (
+                  <a 
+                    href={`/tags/${tag}`}
+                    class="text-xs text-gray-500 hover:text-black"
+                    onclick="event.stopPropagation()"
+                  >
+                    #{tag}
+                  </a>
+                ))}
+              </div>
+            )}
+          </a>
         </div>
       ))}
     </div>

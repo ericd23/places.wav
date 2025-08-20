@@ -2,7 +2,7 @@
 title: "EchöMosa x Places Wav - June"
 artist: "EchöMosa"
 date: 2024-06-15
-image: ""
+cover: "./cover.jpg"
 external_link: "https://soundcloud.com/example"
 tags: ["electronic", "ambient"]
 featured: false

@@ -1,0 +1,37 @@
+---
+import { Image } from 'astro:assets';
+
+export interface Props {
+  collection: string;
+  slug: string;
+  cover: string;
+  alt: string;
+  class?: string;
+}
+
+const { collection, slug, cover, alt, class: className = '' } = Astro.props;
+
+// Get all images from content directories
+const images = import.meta.glob('/src/content/**/*.{jpeg,jpg,png,webp}');
+
+// Build the path to the cover image - handle relative path prefix
+const cleanCover = cover.startsWith('./') ? cover.slice(2) : cover;
+const coverPath = `/src/content/${collection}/${slug}/${cleanCover}`;
+const imageModule = images[coverPath];
+
+---
+
+{imageModule ? (
+  <Image 
+    src={imageModule()} 
+    alt={alt}
+    width={400}
+    height={400}
+    loading="lazy"
+    class={`aspect-square object-cover ${className}`}
+  />
+) : (
+  <div class={`aspect-square bg-gray-200 flex items-center justify-center ${className}`}>
+    <span class="text-gray-400 text-sm">No cover</span>
+  </div>
+)}

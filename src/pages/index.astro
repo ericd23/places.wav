@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import CoverImage from '../components/CoverImage.astro';
 import { getCollection } from 'astro:content';
 
 // Get latest content
@@ -17,7 +18,7 @@ const latestArchives = archives.slice(0, 2);
 ---
 
 <Layout title="Places">
-  <div class="p-4 max-w-2xl mx-auto">
+  <div class="p-4 max-w-6xl mx-auto">
     <div class="mb-8">
       <h1 class="text-2xl mb-4">Places</h1>
       <p class="text-gray-600 mb-8">
@@ -28,14 +29,30 @@ const latestArchives = archives.slice(0, 2);
     <div class="space-y-12">
       <section>
         <h2 class="text-lg mb-4">Latest Mixes</h2>
-        <div class="space-y-2 text-sm">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {latestMixes.map((mix) => (
-            <div class="flex justify-between py-1 border-b border-gray-200">
-              <a href={`/mixes/${mix.slug}`} class="hover:text-gray-600">{mix.data.title}</a>
-              <span class="text-gray-500">{mix.data.date.toLocaleDateString('en-US', { 
-                year: 'numeric', 
-                month: 'short'
-              })}</span>
+            <div class="group">
+              <a href={`/mixes/${mix.slug}`} class="block">
+                <div class="mb-3">
+                  <CoverImage 
+                    collection="mixes"
+                    slug={mix.slug}
+                    cover={mix.data.cover}
+                    alt={`${mix.data.title} by ${mix.data.artist}`}
+                    class="w-full"
+                  />
+                </div>
+                <h3 class="text-lg mb-1 group-hover:text-gray-600">
+                  {mix.data.title}
+                </h3>
+                <p class="text-sm text-gray-600 mb-1">{mix.data.artist}</p>
+                <p class="text-xs text-gray-500">
+                  {mix.data.date.toLocaleDateString('en-US', { 
+                    year: 'numeric', 
+                    month: 'short'
+                  })}
+                </p>
+              </a>
             </div>
           ))}
         </div>
@@ -46,14 +63,36 @@ const latestArchives = archives.slice(0, 2);
 
       <section>
         <h2 class="text-lg mb-4">Latest Conversations</h2>
-        <div class="space-y-2 text-sm">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {latestConversations.map((convo) => (
-            <div class="flex justify-between py-1 border-b border-gray-200">
-              <a href={`/convo/${convo.slug}`} class="hover:text-gray-600">Convo {convo.data.number.toString().padStart(3, '0')}: {convo.data.title}</a>
-              <span class="text-gray-500">{convo.data.date.toLocaleDateString('en-US', { 
-                year: 'numeric', 
-                month: 'short'
-              })}</span>
+            <div class="group">
+              <a href={`/convo/${convo.slug}`} class="block">
+                <div class="mb-3">
+                  {convo.data.cover ? (
+                    <CoverImage 
+                      collection="conversations"
+                      slug={convo.slug}
+                      cover={convo.data.cover}
+                      alt={`Conversation ${convo.data.number}: ${convo.data.title}`}
+                      class="w-full"
+                    />
+                  ) : (
+                    <div class="aspect-square bg-gray-200 flex items-center justify-center w-full">
+                      <span class="text-gray-400 text-sm">No cover</span>
+                    </div>
+                  )}
+                </div>
+                <h3 class="text-lg mb-1 group-hover:text-gray-600">
+                  {convo.data.number.toString().padStart(3, '0')}: {convo.data.title}
+                </h3>
+                <p class="text-sm text-gray-600 mb-1">{convo.data.participants.join(', ')}</p>
+                <p class="text-xs text-gray-500">
+                  {convo.data.date.toLocaleDateString('en-US', { 
+                    year: 'numeric', 
+                    month: 'short'
+                  })}
+                </p>
+              </a>
             </div>
           ))}
         </div>
@@ -64,11 +103,33 @@ const latestArchives = archives.slice(0, 2);
 
       <section>
         <h2 class="text-lg mb-4">Recent Archive</h2>
-        <div class="space-y-2 text-sm">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {latestArchives.map((item) => (
-            <div class="flex justify-between py-1 border-b border-gray-200">
-              <a href={`/archive/${item.slug}`} class="hover:text-gray-600">{item.data.title}</a>
-              <span class="text-gray-500">{item.data.type}</span>
+            <div class="group">
+              <a href={`/archive/${item.slug}`} class="block">
+                <div class="mb-3">
+                  {item.data.cover ? (
+                    <CoverImage 
+                      collection="archive"
+                      slug={item.slug}
+                      cover={item.data.cover}
+                      alt={item.data.title}
+                      class="w-full"
+                    />
+                  ) : (
+                    <div class="aspect-square bg-gray-200 flex items-center justify-center w-full">
+                      <span class="text-gray-400 text-sm">No cover</span>
+                    </div>
+                  )}
+                </div>
+                <h3 class="text-lg mb-1 group-hover:text-gray-600">
+                  {item.data.title}
+                </h3>
+                <p class="text-sm text-gray-600 mb-1">{item.data.type}</p>
+                <p class="text-xs text-gray-500 mb-2">
+                  {item.data.description}
+                </p>
+              </a>
             </div>
           ))}
         </div>

@@ -3,6 +3,7 @@ number: 3
 title: "Rental Joy"
 participants: ["Rental Joy"]
 date: 2024-04-05
+cover: "./cover.jpg"
 tags: ["artist", "creative-process", "performance"]
 featured: false
 ---
