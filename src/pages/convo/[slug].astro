@@ -2,6 +2,7 @@
 import Layout from '../../layouts/Layout.astro';
 import EmbedPlayer from '../../components/EmbedPlayer.astro';
 import TagList from '../../components/TagList.astro';
+import ArtistList from '../../components/ArtistList.astro';
 import { formatDate } from '../../utils/dateFormatter';
 import { getCollection } from 'astro:content';
 
@@ -23,7 +24,7 @@ const { Content } = await convo.render();
         Convo {convo.data.number.toString().padStart(3, '0')}: {convo.data.title}
       </h1>
       <div class="text-sm text-gray-700 mb-4">
-        {convo.data.artist}
+        <ArtistList artists={convo.data.artist} />
       </div>
       <div class="flex justify-between items-center mb-4">
         <div class="text-xs text-gray-500">

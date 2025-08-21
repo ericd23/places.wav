@@ -1,7 +1,7 @@
 ---
 number: 3
 title: "Rental Joy"
-artist: "Rental Joy"
+artist: ["Rental Joy", "Luna Moths"]
 date: 2024-04-05
 cover: "./cover.jpg"
 tags: ["artist", "creative-process", "performance"]

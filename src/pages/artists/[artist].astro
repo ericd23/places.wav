@@ -1,0 +1,67 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import CollectionGrid from '../../components/CollectionGrid.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const mixes = await getCollection('mixes');
+  const conversations = await getCollection('conversations');
+  
+  // Collect all unique artists
+  const artistSet = new Set();
+  
+  mixes.forEach(mix => {
+    mix.data.artist.forEach(artist => artistSet.add(artist));
+  });
+  
+  conversations.forEach(convo => {
+    convo.data.artist.forEach(artist => artistSet.add(artist));
+  });
+  
+  return Array.from(artistSet).map(artist => ({
+    params: { 
+      artist: artist.toLowerCase().replace(/\s+/g, '-')
+    },
+    props: { 
+      artistName: artist,
+      mixes: mixes.filter(mix => mix.data.artist.includes(artist)),
+      conversations: conversations.filter(convo => convo.data.artist.includes(artist))
+    }
+  }));
+}
+
+const { artistName, mixes, conversations } = Astro.props;
+
+// Sort by date (newest first)
+const sortedMixes = mixes.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const sortedConversations = conversations.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+
+<Layout title={`${artistName} - Artists - Places`} variant="wide">
+  <div class="mb-8">
+    <h1 class="text-2xl mb-4">{artistName}</h1>
+    <div class="text-sm text-gray-600">
+      {mixes.length > 0 && (
+        <span>{mixes.length} mix{mixes.length !== 1 ? 'es' : ''}</span>
+      )}{mixes.length > 0 && conversations.length > 0 && (
+        <span> + </span>
+      )}{conversations.length > 0 && (
+        <span>{conversations.length} conversation{conversations.length !== 1 ? 's' : ''}</span>
+      )}
+    </div>
+  </div>
+
+  {sortedMixes.length > 0 && (
+    <section class="mb-12">
+      <h2 class="text-lg mb-4">Mixes</h2>
+      <CollectionGrid items={sortedMixes} collection="mixes" />
+    </section>
+  )}
+
+  {sortedConversations.length > 0 && (
+    <section class="mb-12">
+      <h2 class="text-lg mb-4">Conversations</h2>
+      <CollectionGrid items={sortedConversations} collection="conversations" />
+    </section>
+  )}
+</Layout>

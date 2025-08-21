@@ -1,6 +1,6 @@
 ---
 title: "EchöMosa x Places Wav - June"
-artist: "EchöMosa"
+artist: ["EchöMosa", "DJ Catalyst"]
 date: 2024-06-15
 cover: "./cover.jpg"
 media_url: "https://soundcloud.com/carharttwip/carhartt-wip-radio-august-2025"

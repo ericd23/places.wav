@@ -1,7 +1,7 @@
 ---
 number: 4
 title: "Dunaway + Peachface Love Deep + Woodland Bot"
-artist: "Dunaway, Peachface Love Deep, Woodland Bot"
+artist: ["Dunaway", "Peachface Love Deep", "Woodland Bot"]
 date: 2024-04-10
 cover: "./cover.jpg"
 tags: ["dj", "workshop", "education", "community"]

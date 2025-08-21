@@ -1,0 +1,23 @@
+---
+export interface Props {
+  artists: string[];
+  class?: string;
+}
+
+const { artists, class: className = '' } = Astro.props;
+
+function artistToSlug(artist: string) {
+  return artist.toLowerCase().replace(/\s+/g, '-');
+}
+---
+
+<div class={className}>
+  {artists.map((artist, index) => (
+    <span>
+      <a href={`/artists/${encodeURIComponent(artistToSlug(artist))}`} class="hover:underline">
+        {artist}
+      </a>
+      {index < artists.length - 1 && <span> · </span>}
+    </span>
+  ))}
+</div>

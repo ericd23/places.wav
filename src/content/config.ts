@@ -4,7 +4,7 @@ const mixesCollection = defineCollection({
   type: 'content',
   schema: z.object({
     title: z.string(),
-    artist: z.string(),
+    artist: z.array(z.string()),
     date: z.date(),
     cover: z.string(),
     media_url: z.string().optional(),
@@ -17,7 +17,7 @@ const conversationsCollection = defineCollection({
   schema: z.object({
     number: z.number(),
     title: z.string(),
-    artist: z.string(),
+    artist: z.array(z.string()),
     date: z.date(),
     cover: z.string().optional(),
     media_url: z.string().optional(),

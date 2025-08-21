@@ -1,0 +1,58 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+// Get all artists from mixes and conversations
+const mixes = await getCollection('mixes');
+const conversations = await getCollection('conversations');
+
+// Collect all unique artists
+const artistSet = new Set();
+
+mixes.forEach(mix => {
+  mix.data.artist.forEach(artist => artistSet.add(artist));
+});
+
+conversations.forEach(convo => {
+  convo.data.artist.forEach(artist => artistSet.add(artist));
+});
+
+// Convert to sorted array
+const artists = Array.from(artistSet).sort();
+
+// Get content for each artist
+const artistData = artists.map(artist => {
+  const mixesByArtist = mixes.filter(mix => mix.data.artist.includes(artist));
+  const conversationsByArtist = conversations.filter(convo => convo.data.artist.includes(artist));
+  
+  return {
+    name: artist,
+    mixes: mixesByArtist,
+    conversations: conversationsByArtist,
+    totalContent: mixesByArtist.length + conversationsByArtist.length
+  };
+});
+---
+
+<Layout title="Artists - Places" variant="wide">
+  <h1 class="text-2xl mb-8">Artists</h1>
+  
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    {artistData.map(artist => (
+      <div class="border border-gray-200 p-4 hover:bg-gray-50">
+        <a href={`/artists/${encodeURIComponent(artist.name.toLowerCase().replace(/\s+/g, '-'))}`} class="block">
+          <h3 class="text-lg mb-2 hover:underline">{artist.name}</h3>
+          <div class="text-sm text-gray-600">
+            {artist.mixes.length > 0 && (
+              <span>{artist.mixes.length} mix{artist.mixes.length !== 1 ? 'es' : ''}</span>
+            )}{artist.mixes.length > 0 && artist.conversations.length > 0 && (
+              <span> + </span>
+            )}{artist.conversations.length > 0 && (
+              <span>{artist.conversations.length} conversation{artist.conversations.length !== 1 ? 's' : ''}</span>
+            )}
+          </div>
+        </a>
+      </div>
+    ))}
+  </div>
+</Layout>

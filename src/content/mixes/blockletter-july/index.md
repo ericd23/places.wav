@@ -1,6 +1,6 @@
 ---
 title: "Blockletter x Places Wav - July"
-artist: "Blockletter"
+artist: ["Blockletter", "Sonic Drift", "EchöMosa"]
 date: 2024-07-20
 cover: "./cover.jpg"
 media_url: "https://soundcloud.com/carharttwip/carhartt-wip-radio-august-2025"
