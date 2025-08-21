@@ -4,7 +4,7 @@ artist: "azizA"
 date: 2024-05-10
 cover: "./cover.jpg"
 external_link: "https://soundcloud.com/example"
-embed_url: "https://soundcloud.com/dunawayy/aziza-072425"
+embed_url: "https://soundcloud.com/carharttwip/carhartt-wip-radio-august-2025"
 tags: ["house", "disco"]
 featured: false
 ---

@@ -4,6 +4,7 @@ artist: "EchöMosa"
 date: 2024-06-15
 cover: "./cover.jpg"
 external_link: "https://soundcloud.com/example"
+embed_url: "https://soundcloud.com/carharttwip/carhartt-wip-radio-august-2025"
 tags: ["electronic", "ambient"]
 featured: false
 ---

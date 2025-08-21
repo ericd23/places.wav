@@ -5,6 +5,7 @@ participants: ["Dunaway", "Peachface Love Deep", "Woodland Bot"]
 date: 2024-04-10
 cover: "./cover.jpg"
 tags: ["dj", "workshop", "education", "community"]
+embed_url: "https://www.youtube.com/watch?v=AcQ3Di2Gewc"
 featured: false
 ---
 

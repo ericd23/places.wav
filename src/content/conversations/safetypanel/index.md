@@ -6,6 +6,7 @@ date: 2024-05-12
 cover: "./cover.jpg"
 tags: ["community", "safety", "nightlife", "panel"]
 featured: false
+embed_url: "https://www.youtube.com/watch?v=AcQ3Di2Gewc"
 ---
 
 A panel discussion exploring safety practices and community care within dance and club culture, featuring perspectives from both organizations and volunteers working in the field.
