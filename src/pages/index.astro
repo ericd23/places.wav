@@ -6,15 +6,15 @@ import { getCollection } from 'astro:content';
 // Get latest content
 const mixes = await getCollection('mixes');
 mixes.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
-const latestMixes = mixes.slice(0, 5);
+const latestMixes = mixes.slice(0, 4);
 
 const conversations = await getCollection('conversations');
 conversations.sort((a, b) => b.data.number - a.data.number);
-const latestConversations = conversations.slice(0, 5);
+const latestConversations = conversations.slice(0, 4);
 
 const archives = await getCollection('archive');
 archives.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
-const latestArchives = archives.slice(0, 5);
+const latestArchives = archives.slice(0, 4);
 ---
 
 <Layout title="Places" variant="wide">
@@ -27,27 +27,27 @@ const latestArchives = archives.slice(0, 5);
 
     <div class="space-y-12">
       <section>
-        <h2 class="text-lg mb-4">Latest Mixes</h2>
+        <div class="flex justify-between items-center mb-4">
+          <h2 class="text-lg">Latest Mixes</h2>
+          <a href="/mixes" class="text-xs border border-gray-400 px-3 py-1 hover:bg-gray-100">Show All</a>
+        </div>
         <CollectionGrid items={latestMixes} collection="mixes" />
-        <p class="text-xs text-gray-500 mt-4">
-          <a href="/mixes" class="hover:text-black">All mixes →</a>
-        </p>
       </section>
 
       <section>
-        <h2 class="text-lg mb-4">Latest Conversations</h2>
+        <div class="flex justify-between items-center mb-4">
+          <h2 class="text-lg">Latest Conversations</h2>
+          <a href="/convo" class="text-xs border border-gray-400 px-3 py-1 hover:bg-gray-100">Show All</a>
+        </div>
         <CollectionGrid items={latestConversations} collection="conversations" />
-        <p class="text-xs text-gray-500 mt-4">
-          <a href="/convo" class="hover:text-black">All conversations →</a>
-        </p>
       </section>
 
       <section>
-        <h2 class="text-lg mb-4">Recent Archive</h2>
+        <div class="flex justify-between items-center mb-4">
+          <h2 class="text-lg">Recent Archive</h2>
+          <a href="/archive" class="text-xs border border-gray-400 px-3 py-1 hover:bg-gray-100">Show All</a>
+        </div>
         <CollectionGrid items={latestArchives} collection="archive" />
-        <p class="text-xs text-gray-500 mt-4">
-          <a href="/archive" class="hover:text-black">All archive →</a>
-        </p>
       </section>
     </div>
 

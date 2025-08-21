@@ -9,11 +9,8 @@ export interface Props {
 
 const { 
   title, 
-  description = "Hamilton DJ collective focusing on democratizing DJ practices and music education.",
-  variant = 'narrow'
+  description = "Hamilton DJ collective focusing on democratizing DJ practices and music education."
 } = Astro.props;
-
-const containerClass = variant === 'wide' ? 'max-w-6xl' : 'max-w-2xl';
 ---
 
 <!DOCTYPE html>
@@ -29,21 +26,37 @@ const containerClass = variant === 'wide' ? 'max-w-6xl' : 'max-w-2xl';
   <body class="h-full bg-white text-black font-mono">
     <div class="min-h-full flex flex-col">
       <header class="fixed top-0 left-0 right-0 z-10 border-b border-gray-200" style="background-color: #2627ca;">
-        <nav class="flex items-center justify-between p-4 text-sm">
-          <a href="/" class="hover:opacity-80">
-            <img src="/logo.png" alt="Places" class="h-8" />
-          </a>
-          <div class="flex space-x-6">
-            <a href="/mixes" class="text-white hover:text-gray-300">Mixes</a>
-            <a href="/convo" class="text-white hover:text-gray-300">Convo</a>
-            <a href="/archive" class="text-white hover:text-gray-300">Archive</a>
-            <a href="/about" class="text-white hover:text-gray-300">About</a>
+        <nav class="p-4 text-sm">
+          <!-- Desktop layout -->
+          <div class="hidden md:flex items-center justify-between">
+            <a href="/" class="hover:opacity-80">
+              <img src="/logo.png" alt="Places" class="h-8" />
+            </a>
+            <div class="flex space-x-6">
+              <a href="/mixes" class="text-white hover:text-gray-300">Mixes</a>
+              <a href="/convo" class="text-white hover:text-gray-300">Convo</a>
+              <a href="/archive" class="text-white hover:text-gray-300">Archive</a>
+              <a href="/about" class="text-white hover:text-gray-300">About</a>
+            </div>
+          </div>
+          
+          <!-- Mobile layout - two rows centered -->
+          <div class="md:hidden flex flex-col items-center space-y-3">
+            <a href="/" class="hover:opacity-80">
+              <img src="/logo.png" alt="Places" class="h-8" />
+            </a>
+            <div class="flex space-x-6">
+              <a href="/mixes" class="text-white hover:text-gray-300">Mixes</a>
+              <a href="/convo" class="text-white hover:text-gray-300">Convo</a>
+              <a href="/archive" class="text-white hover:text-gray-300">Archive</a>
+              <a href="/about" class="text-white hover:text-gray-300">About</a>
+            </div>
           </div>
         </nav>
       </header>
       
-      <main class="pt-16 flex-1">
-        <div class={`p-4 ${containerClass} mx-auto`}>
+      <main class="pt-20 md:pt-16 flex-1">
+        <div class="p-4 w-full">
           <slot />
         </div>
       </main>

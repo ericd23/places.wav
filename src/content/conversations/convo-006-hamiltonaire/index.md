@@ -1,7 +1,7 @@
 ---
 number: 6
 title: "Hamiltonaire"
-participants: ["Hamiltonaire"]
+artist: "Hamiltonaire"
 date: 2024-04-20
 tags: ["artist", "creative-process", "collaboration"]
 featured: false

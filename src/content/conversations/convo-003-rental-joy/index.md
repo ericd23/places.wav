@@ -1,12 +1,12 @@
 ---
 number: 3
 title: "Rental Joy"
-participants: ["Rental Joy"]
+artist: "Rental Joy"
 date: 2024-04-05
 cover: "./cover.jpg"
 tags: ["artist", "creative-process", "performance"]
 featured: false
-embed_url: "https://www.youtube.com/watch?v=AcQ3Di2Gewc"
+media_url: "https://www.youtube.com/watch?v=AcQ3Di2Gewc"
 ---
 
 An in-depth conversation with Rental Joy about their artistic practice, creative philosophy, and relationship with music and performance.

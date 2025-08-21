@@ -3,8 +3,7 @@ title: "Blockletter x Places Wav - July"
 artist: "Blockletter"
 date: 2024-07-20
 cover: "./cover.jpg"
-external_link: "https://mixcloud.com/example"
-embed_url: "https://soundcloud.com/carharttwip/carhartt-wip-radio-august-2025"
+media_url: "https://soundcloud.com/carharttwip/carhartt-wip-radio-august-2025"
 tags: ["techno", "experimental"]
 featured: false
 ---

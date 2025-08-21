@@ -1,11 +1,11 @@
 ---
 number: 5
 title: "Peachface Lovedeep + Godemperor + blankchasm"
-participants: ["Peachface Lovedeep", "Godemperor", "blankchasm"]
+artist: "Peachface Lovedeep, Godemperor, blankchasm"
 date: 2024-04-15
 cover: "./cover.jpg"
 tags: ["collaboration", "community", "music"]
-embed_url: "https://www.youtube.com/watch?v=AcQ3Di2Gewc"
+media_url: "https://www.youtube.com/watch?v=AcQ3Di2Gewc"
 featured: false
 ---
 

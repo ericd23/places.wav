@@ -1,7 +1,7 @@
 ---
 number: 2
 title: "crdj"
-participants: ["crdj"]
+artist: "crdj"
 date: 2024-04-02
 cover: "./cover.jpg"
 tags: ["dj", "curation", "community"]

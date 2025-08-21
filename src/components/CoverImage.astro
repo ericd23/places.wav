@@ -35,13 +35,12 @@ if (imageModule) {
   <Image 
     src={resolvedImage} 
     alt={alt}
-    width={200}
-    height={200}
+    width={300}
+    height={300}
     loading="lazy"
-    class={`object-cover ${className}`}
-    style="width: 200px; height: 200px;"
+    class={`object-cover aspect-square w-full ${className}`}
   />
 ) : (
-  <div class={`bg-gray-100 ${className}`} style="width: 200px; height: 200px;">
+  <div class={`bg-gray-100 aspect-square w-full ${className}`}>
   </div>
 )}
