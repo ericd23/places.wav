@@ -1,4 +1,6 @@
 ---
+import { getTagUrl } from '../utils/routes';
+
 export interface Props {
   tags?: string[];
   currentTag?: string;
@@ -12,7 +14,7 @@ const { tags, currentTag, class: className = 'flex flex-wrap gap-1 mt-2' } = Ast
   <div class={className}>
     {tags.map((tag) => (
       <a 
-        href={`/tag/${tag}`}
+        href={getTagUrl(tag)}
         class={`text-xs ${
           currentTag && tag === currentTag 
             ? 'text-black font-medium' 

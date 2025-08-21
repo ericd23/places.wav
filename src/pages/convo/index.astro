@@ -1,15 +1,9 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import CollectionGrid from '../../components/CollectionGrid.astro';
-import { getCollection } from 'astro:content';
-
-// Get all conversations, sorted by number (newest first)
-const conversations = await getCollection('conversations');
-conversations.sort((a, b) => b.data.number - a.data.number);
+import CollectionIndex from '../../components/CollectionIndex.astro';
 ---
 
-<Layout title="Conversations - Places" description="Interviews and conversations with DJs, artists, and community members" variant="wide">
-    <h1 class="text-2xl mb-8">Convo</h1>
-    
-    <CollectionGrid items={conversations} collection="conversations" showCount={false} />
-</Layout>
+<CollectionIndex 
+  collection="conversations" 
+  title="Convo"
+  description="Interviews and conversations with DJs, artists, and community members"
+/>

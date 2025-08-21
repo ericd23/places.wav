@@ -1,9 +1,5 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import EmbedPlayer from '../../components/EmbedPlayer.astro';
-import TagList from '../../components/TagList.astro';
-import ArtistList from '../../components/ArtistList.astro';
-import { formatDate } from '../../utils/dateFormatter';
+import ContentPage from '../../components/ContentPage.astro';
 import { getCollection } from 'astro:content';
 
 export async function getStaticPaths() {
@@ -18,28 +14,4 @@ const { convo } = Astro.props;
 const { Content } = await convo.render();
 ---
 
-<Layout title={`Convo ${convo.data.number.toString().padStart(3, '0')}: ${convo.data.title} - Places`} variant="wide">
-    <header class="mb-8">
-      <h1 class="text-2xl mb-2">
-        Convo {convo.data.number.toString().padStart(3, '0')}: {convo.data.title}
-      </h1>
-      <div class="text-sm text-gray-700 mb-4">
-        <ArtistList artists={convo.data.artists} />
-      </div>
-      <div class="flex justify-between items-center mb-4">
-        <div class="text-xs text-gray-500">
-          {formatDate(convo.data.date, 'long')}
-        </div>
-        <TagList tags={convo.data.tags} class="flex gap-2" />
-      </div>
-    </header>
-
-    {convo.data.media_url && (
-      <EmbedPlayer url={convo.data.media_url} />
-    )}
-
-    <article class="markdown-body text-sm leading-relaxed text-black">
-      <Content />
-    </article>
-
-</Layout>
+<ContentPage item={convo} collection="conversations" Content={Content} />

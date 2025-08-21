@@ -2,14 +2,13 @@
 import Layout from '../layouts/Layout.astro';
 import CollectionGrid from '../components/CollectionGrid.astro';
 import { getCollection } from 'astro:content';
+import { sortCollectionItems } from '../utils/sorting';
 
 // Get latest content
-const mixes = await getCollection('mixes');
-mixes.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const mixes = sortCollectionItems(await getCollection('mixes'), 'mixes');
 const latestMixes = mixes.slice(0, 4);
 
-const conversations = await getCollection('conversations');
-conversations.sort((a, b) => b.data.number - a.data.number);
+const conversations = sortCollectionItems(await getCollection('conversations'), 'conversations');
 const latestConversations = conversations.slice(0, 4);
 
 ---

@@ -1,39 +1,32 @@
 import { defineCollection, z } from 'astro:content';
 
+const baseContentSchema = z.object({
+  title: z.string(),
+  date: z.date(),
+  cover: z.string().optional(),
+  media_url: z.string().optional(),
+  tags: z.array(z.string()).default([]),
+});
+
 const mixesCollection = defineCollection({
   type: 'content',
-  schema: z.object({
-    title: z.string(),
+  schema: baseContentSchema.extend({
     artists: z.array(z.string()),
-    date: z.date(),
     cover: z.string(),
-    media_url: z.string().optional(),
-    tags: z.array(z.string()).default([]),
   }),
 });
 
 const conversationsCollection = defineCollection({
   type: 'content',
-  schema: z.object({
+  schema: baseContentSchema.extend({
     number: z.number(),
-    title: z.string(),
     artists: z.array(z.string()),
-    date: z.date(),
-    cover: z.string().optional(),
-    media_url: z.string().optional(),
-    tags: z.array(z.string()).default([]),
   }),
 });
 
 const archiveCollection = defineCollection({
   type: 'content',
-  schema: z.object({
-    title: z.string(),
-    date: z.date(),
-    cover: z.string().optional(),
-    media_url: z.string().optional(),
-    tags: z.array(z.string()).default([]),
-  }),
+  schema: baseContentSchema,
 });
 
 export const collections = {

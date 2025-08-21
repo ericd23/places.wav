@@ -1,20 +1,16 @@
 ---
 import CoverImage from './CoverImage.astro';
 import { formatDate } from '../utils/dateFormatter';
+import { getItemUrl, type CollectionType } from '../utils/routes';
 
 export interface Props {
   items: any[];
-  collection: 'mixes' | 'conversations' | 'archive';
+  collection: CollectionType;
   showCount?: boolean;
   currentTag?: string;
 }
 
 const { items, collection, showCount = false, currentTag } = Astro.props;
-
-function getItemUrl(item: any, collection: string) {
-  if (collection === 'conversations') return `/convo/${item.slug}`;
-  return `/${collection}/${item.slug}`;
-}
 
 function getItemTitle(item: any, collection: string) {
   if (collection === 'conversations') {
@@ -48,7 +44,7 @@ function getCoverAlt(item: any, collection: string) {
   {items.map((item) => (
     <div class="group w-full">
       <div class="mb-3">
-        <a href={getItemUrl(item, collection)} class="block cursor-pointer">
+        <a href={getItemUrl(item.slug, collection)} class="block cursor-pointer">
           {item.data.cover ? (
             <CoverImage 
               collection={collection}
@@ -63,7 +59,7 @@ function getCoverAlt(item: any, collection: string) {
           )}
         </a>
       </div>
-      <a href={getItemUrl(item, collection)} class="cursor-pointer">
+      <a href={getItemUrl(item.slug, collection)} class="cursor-pointer">
         <h3 class="text-sm mb-1 hover:underline">
           {getItemTitle(item, collection)}
         </h3>

@@ -1,15 +1,9 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import CollectionGrid from '../../components/CollectionGrid.astro';
-import { getCollection } from 'astro:content';
-
-// Get all archive entries, sorted by date (newest first)
-const archives = await getCollection('archive');
-archives.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+import CollectionIndex from '../../components/CollectionIndex.astro';
 ---
 
-<Layout title="Archive - Places" description="Photography, workshops, events, and historical documentation" variant="wide">
-    <h1 class="text-2xl mb-8">Archive</h1>
-    
-    <CollectionGrid items={archives} collection="archive" showCount={false} />
-</Layout>
+<CollectionIndex 
+  collection="archive" 
+  title="Archive"
+  description="Photography, workshops, events, and historical documentation"
+/>
