@@ -25,7 +25,7 @@ const {
   </head>
   <body class="h-full bg-white text-black font-mono">
     <div class="min-h-full flex flex-col">
-      <header class="fixed top-0 left-0 right-0 z-10 border-b border-gray-200" style="background-color: #2627ca;">
+      <header id="main-header" class="fixed top-0 left-0 right-0 z-10 border-b border-gray-200 transition-transform duration-300 ease-in-out" style="background-color: #2627ca;">
         <nav class="p-4 text-sm">
           <!-- Desktop layout -->
           <div class="hidden md:flex items-center justify-between">
@@ -72,5 +72,54 @@ const {
         </div>
       </footer>
     </div>
+    
+    <script>
+      let lastScrollY = window.scrollY;
+      let ticking = false;
+      
+      function updateHeader() {
+        const header = document.getElementById('main-header');
+        const currentScrollY = window.scrollY;
+        
+        // Only apply on mobile (screens smaller than md breakpoint)
+        if (window.innerWidth < 768) {
+          if (currentScrollY > lastScrollY && currentScrollY > 100) {
+            // Scrolling down & past 100px - hide header
+            header.style.transform = 'translateY(-100%)';
+          } else {
+            // Scrolling up or at top - show header
+            header.style.transform = 'translateY(0)';
+          }
+        } else {
+          // Desktop - always show header
+          header.style.transform = 'translateY(0)';
+        }
+        
+        lastScrollY = currentScrollY;
+        ticking = false;
+      }
+      
+      function onScroll() {
+        if (!ticking) {
+          requestAnimationFrame(updateHeader);
+          ticking = true;
+        }
+      }
+      
+      function onResize() {
+        // Reset header position on resize
+        const header = document.getElementById('main-header');
+        if (window.innerWidth >= 768) {
+          header.style.transform = 'translateY(0)';
+        }
+      }
+      
+      // Add event listeners
+      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('resize', onResize);
+      
+      // Initial call to set correct state
+      updateHeader();
+    </script>
   </body>
 </html>
