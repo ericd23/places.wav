@@ -12,9 +12,6 @@ const conversations = await getCollection('conversations');
 conversations.sort((a, b) => b.data.number - a.data.number);
 const latestConversations = conversations.slice(0, 4);
 
-const archives = await getCollection('archive');
-archives.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
-const latestArchives = archives.slice(0, 4);
 ---
 
 <Layout title="Places" variant="wide">
@@ -42,13 +39,6 @@ const latestArchives = archives.slice(0, 4);
         <CollectionGrid items={latestConversations} collection="conversations" />
       </section>
 
-      <section>
-        <div class="flex justify-between items-center mb-4">
-          <h2 class="text-lg">Recent Archive</h2>
-          <a href="/archive" class="text-xs border border-gray-400 px-3 py-1 hover:bg-gray-100">Show All</a>
-        </div>
-        <CollectionGrid items={latestArchives} collection="archive" />
-      </section>
     </div>
 
 </Layout>

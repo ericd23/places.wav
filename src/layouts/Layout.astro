@@ -79,6 +79,8 @@ const {
       
       function updateHeader() {
         const header = document.getElementById('main-header');
+        if (!header) return;
+        
         const currentScrollY = window.scrollY;
         
         // Only apply on mobile (screens smaller than md breakpoint)
@@ -109,6 +111,8 @@ const {
       function onResize() {
         // Reset header position on resize
         const header = document.getElementById('main-header');
+        if (!header) return;
+        
         if (window.innerWidth >= 768) {
           header.style.transform = 'translateY(0)';
         }
