@@ -24,8 +24,8 @@ function getItemTitle(item: any, collection: string) {
 }
 
 function getItemSubtitle(item: any, collection: string) {
-  if (collection === 'mixes') return item.data.artist.join(', ');
-  if (collection === 'conversations') return item.data.artist.join(', ');
+  if (collection === 'mixes') return item.data.artists.join(', ');
+  if (collection === 'conversations') return item.data.artists.join(', ');
   return '';
 }
 

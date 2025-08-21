@@ -1,7 +1,7 @@
 ---
 number: 7
 title: "Safety in Dance and Club Culture"
-artist: ["Mirand (SACHA)", "TJ (SOPEN)", "Aaron (volunteer)", "Trina (volunteer)"]
+artists: ["Mirand (SACHA)", "TJ (SOPEN)", "Aaron (volunteer)", "Trina (volunteer)"]
 date: 2024-05-12
 cover: "./cover.jpg"
 tags: ["community", "safety", "nightlife", "panel"]

@@ -14,7 +14,7 @@ function artistToSlug(artist: string) {
 <div class={className}>
   {artists.map((artist, index) => (
     <span>
-      <a href={`/artists/${encodeURIComponent(artistToSlug(artist))}`} class="hover:underline">
+      <a href={`/artist/${encodeURIComponent(artistToSlug(artist))}`} class="hover:underline">
         {artist}
       </a>
       {index < artists.length - 1 && <span> · </span>}

@@ -1,7 +1,7 @@
 ---
 number: 1
 title: "DJ Abdi"
-artist: ["DJ Abdi", "Sonic Drift"]
+artists: ["DJ Abdi", "Sonic Drift"]
 date: 2024-04-01
 tags: ["dj", "community", "founding"]
 featured: false

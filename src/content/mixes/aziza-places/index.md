@@ -1,6 +1,6 @@
 ---
 title: "azizA x Places Wav"
-artist: ["azizA"]
+artists: ["azizA"]
 date: 2024-05-10
 cover: "./cover.jpg"
 media_url: "https://soundcloud.com/carharttwip/carhartt-wip-radio-august-2025"

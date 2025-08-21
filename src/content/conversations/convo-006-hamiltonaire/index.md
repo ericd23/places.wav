@@ -1,7 +1,7 @@
 ---
 number: 6
 title: "Hamiltonaire"
-artist: ["Hamiltonaire", "Luna Moths", "DJ Catalyst"]
+artists: ["Hamiltonaire", "Luna Moths", "DJ Catalyst"]
 date: 2024-04-20
 tags: ["artist", "creative-process", "collaboration"]
 featured: false

@@ -10,11 +10,11 @@ const conversations = await getCollection('conversations');
 const artistSet = new Set();
 
 mixes.forEach(mix => {
-  mix.data.artist.forEach(artist => artistSet.add(artist));
+  mix.data.artists.forEach(artist => artistSet.add(artist));
 });
 
 conversations.forEach(convo => {
-  convo.data.artist.forEach(artist => artistSet.add(artist));
+  convo.data.artists.forEach(artist => artistSet.add(artist));
 });
 
 // Convert to sorted array
@@ -22,8 +22,8 @@ const artists = Array.from(artistSet).sort();
 
 // Get content for each artist
 const artistData = artists.map(artist => {
-  const mixesByArtist = mixes.filter(mix => mix.data.artist.includes(artist));
-  const conversationsByArtist = conversations.filter(convo => convo.data.artist.includes(artist));
+  const mixesByArtist = mixes.filter(mix => mix.data.artists.includes(artist));
+  const conversationsByArtist = conversations.filter(convo => convo.data.artists.includes(artist));
   
   return {
     name: artist,
@@ -40,7 +40,7 @@ const artistData = artists.map(artist => {
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
     {artistData.map(artist => (
       <div class="border border-gray-200 p-4 hover:bg-gray-50">
-        <a href={`/artists/${encodeURIComponent(artist.name.toLowerCase().replace(/\s+/g, '-'))}`} class="block">
+        <a href={`/artist/${encodeURIComponent(artist.name.toLowerCase().replace(/\s+/g, '-'))}`} class="block">
           <h3 class="text-lg mb-2 hover:underline">{artist.name}</h3>
           <div class="text-sm text-gray-600">
             {artist.mixes.length > 0 && (

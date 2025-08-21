@@ -11,11 +11,11 @@ export async function getStaticPaths() {
   const artistSet = new Set();
   
   mixes.forEach(mix => {
-    mix.data.artist.forEach(artist => artistSet.add(artist));
+    mix.data.artists.forEach(artist => artistSet.add(artist));
   });
   
   conversations.forEach(convo => {
-    convo.data.artist.forEach(artist => artistSet.add(artist));
+    convo.data.artists.forEach(artist => artistSet.add(artist));
   });
   
   return Array.from(artistSet).map(artist => ({
@@ -24,8 +24,8 @@ export async function getStaticPaths() {
     },
     props: { 
       artistName: artist,
-      mixes: mixes.filter(mix => mix.data.artist.includes(artist)),
-      conversations: conversations.filter(convo => convo.data.artist.includes(artist))
+      mixes: mixes.filter(mix => mix.data.artists.includes(artist)),
+      conversations: conversations.filter(convo => convo.data.artists.includes(artist))
     }
   }));
 }

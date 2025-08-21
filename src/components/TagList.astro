@@ -12,7 +12,7 @@ const { tags, currentTag, class: className = 'flex flex-wrap gap-1 mt-2' } = Ast
   <div class={className}>
     {tags.map((tag) => (
       <a 
-        href={`/tags/${tag}`}
+        href={`/tag/${tag}`}
         class={`text-xs ${
           currentTag && tag === currentTag 
             ? 'text-black font-medium' 
